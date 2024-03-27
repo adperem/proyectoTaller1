@@ -38,12 +38,12 @@ public:
 
     // Función para obtener un elemento de la matriz
     double getElement(int row, int col) const {
-        return data[row][col];
+        return data[row-1][col-1];
     }
 
     // Función para establecer un elemento de la matriz
     void setElement(int row, int col, double value) {
-        data[row][col] = value;
+        data[row-1][col-1] = value;
     }
 
 
