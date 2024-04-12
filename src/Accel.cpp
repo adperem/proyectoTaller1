@@ -19,7 +19,9 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
-function [dY] = Accel(x, Y)
+public Accel(x, Y){
+    
+}
 
 global const AuxParam eopdata
 
@@ -63,3 +65,4 @@ if (AuxParam.planets){
 
         dY = [Y(4:6);a];
 
+return dY
