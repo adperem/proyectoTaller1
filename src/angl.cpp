@@ -1,15 +1,4 @@
-#include <math.h>
-#include "Matrix.h"
-//--------------------------------------------------------------------------
-//
-//  inputs:
-//    vec1         - vector 1
-//    vec2         - vector 2
-//
-//  output:
-//    theta        - angle between the two vectors  -pi to pi
-//
-//--------------------------------------------------------------------------
+#include "angl.h"
 double angl (Matrix vec1,Matrix vec2){
 
     double small     = 0.00000001;
