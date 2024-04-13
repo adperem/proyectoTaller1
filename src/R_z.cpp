@@ -1,15 +1,5 @@
 #include <math.h>
-#include "Matrix.h"
-//
-// Created by adperem on 27/03/2024.
-//
-//--------------------------------------------------------------------------
-//  input:
-//    angle       - angle of rotation [rad]
-//
-//  output:
-//    rotmat      - vector result
-//--------------------------------------------------------------------------
+#include "R_y.h"
 Matrix R_z(double angle) {
     double C = cos(angle);
     double S = sin(angle);
