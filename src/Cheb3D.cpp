@@ -44,8 +44,7 @@ Matrix Cheb3D(double t, int N, double Ta, double Tb, Matrix Cx, Matrix Cy, Matri
     aux.setElement(1,3,Cz.getElement(1,1));
     Matrix ChebApp = (f1 * tau) - f2 + aux;
 
-
-
+    return ChebApp;
 }
 
 
