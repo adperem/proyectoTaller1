@@ -39,6 +39,9 @@ public:
     // Método estático para multiplicar una matriz por un número
     friend Matrix multiply(const Matrix& mat, double factor);
 
+    // Método  para comparar si dos matrices son iguales
+    bool equals(Matrix mat);
+
     // Sobrecarga del operador de suma (+)
     Matrix operator+(const Matrix& other) const;
 

@@ -22,7 +22,7 @@ void AzElPa(double& Az, double& El, Matrix& dAds, Matrix& dEds, Matrix s){
     dEds.setElement(1,1,-s.getElement(1,1)*s.getElement(1,3)/rho);
     dEds.setElement(1,2,-s.getElement(1,2)*s.getElement(1,3)/rho);
     dEds.setElement(1,3,rho);
-    dEds = dEds / Matrix::dot(s,s);
+    dEds = dEds / dot(s,s);
 
 }
 

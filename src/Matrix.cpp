@@ -194,3 +194,20 @@ Matrix Matrix::operator/(double divisor) const {
 
     return resultado;
 }
+
+// Método  para comparar si dos matrices son iguales
+bool Matrix::equals(Matrix mat) {
+
+    if (mat.rows != mat.rows || mat.cols != mat.cols) {
+        return false; // Las matrices tienen diferentes dimensiones
+    }
+
+    for (int i = 1; i <= mat.rows; ++i) {
+        for (int j = 1; j <= mat.cols; ++j) {
+            if (mat.getElement(i, j) != mat.getElement(i, j)) {
+                return false; // Los elementos en la posición (i, j) son diferentes
+            }
+        }
+    }
+    return true; // Todas las posiciones coinciden
+}
