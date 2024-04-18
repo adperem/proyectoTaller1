@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+
 #include "EccAnom.h"
-=======
 #include "Matrix.h"
 #include <cmath>
 #include <stdexcept>
@@ -19,7 +18,6 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
->>>>>>> origin/main
 double EccAnom(double M, double e) {
     int maxit = 15;
     int i = 1;

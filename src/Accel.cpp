@@ -19,6 +19,7 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+/*
 public Accel(x, Y){
     
 }
@@ -65,4 +66,4 @@ if (AuxParam.planets){
 
         dY = [Y(4:6);a];
 
-return dY
+return dY*/

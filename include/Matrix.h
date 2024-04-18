@@ -28,16 +28,22 @@ public:
     void setElement(int row, int col, double value);
 
     // Método estático para calcular la norma de la matriz
-    static double norm(const Matrix& mat);
+    friend double norm(const Matrix& mat);
 
     // Método estático para calcular el producto escalar entre dos matrices
-    static double dot(const Matrix& mat1, const Matrix& mat2);
+    friend double dot(const Matrix& mat1, const Matrix& mat2);
+
+    // Método estático para dividir una matriz por un número
+    friend Matrix divide(const Matrix& mat, double divisor);
+
+    // Método estático para multiplicar una matriz por un número
+    friend Matrix multiply(const Matrix& mat, double factor);
 
     // Sobrecarga del operador de suma (+)
     Matrix operator+(const Matrix& other) const;
 
      // Sobrecarga del operador de suma (-)
-    Matrix operator-(const Matrix& other) const;
+    Matrix operator-(const Matrix other) const;
 
     // Sobrecarga del operador de multiplicación (*)
     Matrix operator*(const Matrix& other) const;
@@ -47,18 +53,15 @@ public:
     Matrix operator/(const Matrix& other) const;
     Matrix operator/(double divisor) const;
 
-    // Método estático para dividir una matriz por un número
-    static Matrix divide(const Matrix& mat, double divisor);
-
-    // Método estático para multiplicar una matriz por un número
-    static Matrix multiply(const Matrix& mat, double factor);
-
-
-
-
-
 
 };
 
+double norm(const Matrix& mat);
+
+double dot(const Matrix& mat1, const Matrix& mat2);
+
+Matrix divide(const Matrix& mat, double divisor);
+
+Matrix multiply(const Matrix& mat, double factor);
 
 #endif //PROYECTOTALLER1_MATRIX_H
