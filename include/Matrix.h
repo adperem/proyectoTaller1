@@ -45,7 +45,7 @@ public:
     // Sobrecarga del operador de suma (+)
     Matrix operator+(const Matrix& other) const;
 
-     // Sobrecarga del operador de suma (-)
+    // Sobrecarga del operador de suma (-)
     Matrix operator-(const Matrix other) const;
 
     // Sobrecarga del operador de multiplicación (*)
@@ -55,6 +55,10 @@ public:
     // Sobrecarga del operador de multiplicación (/)
     Matrix operator/(const Matrix& other) const;
     Matrix operator/(double divisor) const;
+
+    // Sobrecarga del operador de igual (=)
+    bool operator==(const Matrix other) const;
+
 
 
 };

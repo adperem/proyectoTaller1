@@ -5,6 +5,7 @@
 #include <cmath>
 #include "Matrix.h"
 #include "R_y.h"
+#include <cassert>
 
 int main() {
     // Definir el ángulo para la rotación
@@ -26,11 +27,9 @@ int main() {
     expected_rot_mat.setElement(3, 3, cos(angle));
 
     // Verificar si las matrices son iguales
-    if (rot_mat.equals(expected_rot_mat)) {
-        std::cout << "La matriz de rotación obtenida es correcta." << std::endl;
-    } else {
-        std::cout << "Error: La matriz de rotación obtenida es incorrecta." << std::endl;
-    }
+    assert(rot_mat == expected_rot_mat && "Error: La matriz de rotación obtenida es incorrecta.");
+
+    std::cout << "La matriz de rotación obtenida es correcta." << std::endl;
 
     return 0;
 }

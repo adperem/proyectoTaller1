@@ -29,7 +29,14 @@ add_executable(proyectoTaller1
         src/R_x.cpp
         src/R_y.cpp
         src/R_z.cpp
+        #test/testAzElPa.cpp
+        #test/testCheb3D.cpp
+        test/testEccAnom.cpp
+        #test/testAccelPointMass.cpp
         #test/Main.cpp
         #test/testFrac.cpp
         #test/testR_x.cpp
-        #test/testR_y.cpp)
+        #test/testR_y.cpp
+        #test/testR_z.cpp
+
+)

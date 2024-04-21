@@ -195,16 +195,32 @@ Matrix Matrix::operator/(double divisor) const {
     return resultado;
 }
 
-// Método  para comparar si dos matrices son iguales
+// Método para comparar si dos matrices son iguales
 bool Matrix::equals(Matrix mat) {
-
-    if (mat.rows != mat.rows || mat.cols != mat.cols) {
+    if (rows != mat.rows || cols != mat.cols) {
         return false; // Las matrices tienen diferentes dimensiones
     }
 
-    for (int i = 1; i <= mat.rows; ++i) {
-        for (int j = 1; j <= mat.cols; ++j) {
-            if (mat.getElement(i, j) != mat.getElement(i, j)) {
+    for (int i = 1; i <= rows; ++i) {
+        for (int j = 1; j <= cols; ++j) {
+            if (getElement(i, j) != mat.getElement(i, j)) {
+                std::cout<< "Los elementos en la posición ("<<i<<","<< j<<") son diferentes"<<std::endl;
+                return false; // Los elementos en la posición (i, j) son diferentes
+            }
+        }
+    }
+    return true; // Todas las posiciones coinciden
+}
+
+
+bool Matrix::operator==(const Matrix other) const {
+    if (rows != other.rows || cols != other.cols) {
+        return false; // Las matrices tienen diferentes dimensiones
+    }
+
+    for (int i = 1; i <= rows; ++i) {
+        for (int j = 1; j <= cols; ++j) {
+            if (getElement(i, j) != other.getElement(i, j)) {
                 return false; // Los elementos en la posición (i, j) son diferentes
             }
         }

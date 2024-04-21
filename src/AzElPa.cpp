@@ -25,11 +25,3 @@ void AzElPa(double& Az, double& El, Matrix& dAds, Matrix& dEds, Matrix s){
     dEds = dEds / dot(s,s);
 
 }
-
-
-
-
-
-
-
-
