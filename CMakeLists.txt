@@ -39,4 +39,4 @@ add_executable(proyectoTaller1
         #test/testR_y.cpp
         #test/testR_z.cpp
 
-)
+        src/EKF_GEOS3.cpp include/Globals.h src/Globals.cpp include/Const.h)
