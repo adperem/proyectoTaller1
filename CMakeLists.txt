@@ -25,6 +25,8 @@ add_executable(proyectoTaller1
         include/MeanObliquity.h
         include/Mjday.h
         include/Mjday_TDB.h
+        include/NutAngles.h
+        include/Position.h
 
 
 
@@ -49,6 +51,8 @@ add_executable(proyectoTaller1
         src/MeanObliquity.cpp
         src/Mjday.cpp
         src/Mjday_TDB.cpp
+        src/NutAngles.cpp
+        src/Position.cpp
 
 
         #test/testAzElPa.cpp
@@ -65,9 +69,8 @@ add_executable(proyectoTaller1
         #test/testLegendre.cpp
         #test/testMeanObliquity.cpp
         #test/testMjday.cpp
-        test/testMjday_TDB.cpp
-        src/NutAngles.cpp
-        include/NutAngles.h
+        #test/testMjday_TDB.cpp
+        test/testPosition.cpp
 
 
 )
