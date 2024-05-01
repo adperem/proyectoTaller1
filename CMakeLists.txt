@@ -66,6 +66,8 @@ add_executable(proyectoTaller1
         #test/testMeanObliquity.cpp
         #test/testMjday.cpp
         test/testMjday_TDB.cpp
+        src/NutAngles.cpp
+        include/NutAngles.h
 
 
 )
