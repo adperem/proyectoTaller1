@@ -74,6 +74,9 @@ add_executable(proyectoTaller1
         include/sign_.h
         src/sign_.cpp
         test/testSign_.cpp
+        src/timediff.cpp
+        include/timediff.h
+        src/testTimediff.cpp
 
 
 )
