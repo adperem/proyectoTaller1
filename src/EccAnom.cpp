@@ -1,7 +1,4 @@
 #include "EccAnom.h"
-#include "Matrix.h"
-#include <cmath>
-#include <stdexcept>
 //--------------------------------------------------------------------------
 //
 // Purpose:

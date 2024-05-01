@@ -1,6 +1,7 @@
 //
 // Created by adperem on 24/04/2024.
 //
+/*
 #include "Globals.h"
 
 
@@ -24,3 +25,4 @@ void Globals::eop19620101(int c){
 
 
 }
+ */

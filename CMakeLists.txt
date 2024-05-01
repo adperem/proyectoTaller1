@@ -17,6 +17,18 @@ add_executable(proyectoTaller1
         include/R_x.h
         include/R_y.h
         include/R_z.h
+        include/Geodetic.h
+        include/Globals.h
+        include/SAT_Const.h
+        include/Legendre.h
+        include/IERS.h
+        include/MeanObliquity.h
+
+
+
+
+
+
         src/Accel.cpp
         src/AccelPointMass.cpp
         src/angl.cpp
@@ -29,14 +41,29 @@ add_executable(proyectoTaller1
         src/R_x.cpp
         src/R_y.cpp
         src/R_z.cpp
+        src/Geodetic.cpp
+        src/EKF_GEOS3.cpp
+        src/Globals.cpp
+        src/IERS.cpp
+        src/Legendre.cpp
+        src/MeanObliquity.cpp
+
+
+
+
         #test/testAzElPa.cpp
         #test/testCheb3D.cpp
-        test/testEccAnom.cpp
+        #test/testEccAnom.cpp
         #test/testAccelPointMass.cpp
         #test/Main.cpp
         #test/testFrac.cpp
         #test/testR_x.cpp
         #test/testR_y.cpp
         #test/testR_z.cpp
+        #test/testGeodetic.cpp
+        #test/testIERS.cpp
+        #test/testLegendre.cpp
+        test/testMeanObliquity.cpp
 
-        src/EKF_GEOS3.cpp include/Globals.h src/Globals.cpp include/Const.h)
+
+)

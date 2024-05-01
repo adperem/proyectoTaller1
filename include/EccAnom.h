@@ -6,6 +6,8 @@
 #define PROYECTOTALLER1_ECCANOM_H
 #include <cmath>
 #include <stdexcept>
+#include "Matrix.h"
+#include <stdexcept>
 //--------------------------------------------------------------------------
 //
 // Purpose:

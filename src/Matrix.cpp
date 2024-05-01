@@ -40,6 +40,24 @@ void Matrix::setElement(int row, int col, double value) {
     data[row-1][col-1] = value;
 }
 
+// Devuelve la columna
+Matrix Matrix::getColumn(int column) {
+    Matrix aux(this->rows,1);
+    for (int i = 1; i <= this->rows; i++){
+        aux(i,1) = this->getElement(i,column);
+    }
+    return aux;
+}
+
+// Devuelve la fila
+Matrix Matrix::getRow(int row) {
+    Matrix aux(1,this->cols);
+    for (int i = 1; i <= this->cols; i++){
+        aux(1,1) = this->getElement(row,i);
+    }
+    return aux;
+}
+
 // Método estático para calcular la norma de la matriz
 double norm(const Matrix& mat) {
     double suma_cuadrados = 0.0;
@@ -166,6 +184,35 @@ Matrix Matrix::operator/(double divisor) const {
 
     return result;
 }
+bool Matrix::operator==(const Matrix other) const {
+    if (rows != other.rows || cols != other.cols) {
+        return false; // Las matrices tienen diferentes dimensiones
+    }
+
+    for (int i = 1; i <= rows; ++i) {
+        for (int j = 1; j <= cols; ++j) {
+            if (getElement(i, j) != other.getElement(i, j)) {
+                return false; // Los elementos en la posición (i, j) son diferentes
+            }
+        }
+    }
+    return true; // Todas las posiciones coinciden
+}
+
+double Matrix::operator()(int i, int j) const {
+    if (i < 1 || i > rows || j < 1 || j > cols) {
+        throw std::out_of_range("Index out of range.");
+    }
+    return data[i - 1][j - 1];
+}
+
+// Overload operator() to access and modify elements directly
+double&  Matrix::operator()(int i, int j) {
+    if (i < 1 || i > rows || j < 1 || j > cols) {
+        throw std::out_of_range("Index out of range.");
+    }
+    return data[i - 1][j - 1];
+}
 
 // Método estático para dividir una matriz por un número
  Matrix divide(const Matrix& mat, double divisor) {
@@ -213,17 +260,4 @@ bool Matrix::equals(Matrix mat) {
 }
 
 
-bool Matrix::operator==(const Matrix other) const {
-    if (rows != other.rows || cols != other.cols) {
-        return false; // Las matrices tienen diferentes dimensiones
-    }
 
-    for (int i = 1; i <= rows; ++i) {
-        for (int j = 1; j <= cols; ++j) {
-            if (getElement(i, j) != other.getElement(i, j)) {
-                return false; // Los elementos en la posición (i, j) son diferentes
-            }
-        }
-    }
-    return true; // Todas las posiciones coinciden
-}

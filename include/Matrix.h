@@ -27,6 +27,12 @@ public:
     // Función para establecer un elemento de la matriz
     void setElement(int row, int col, double value);
 
+    // Devuelve la columna
+    Matrix getColumn(int column);
+
+    // Devuelve la fila
+    Matrix getRow(int row);
+
     // Método estático para calcular la norma de la matriz
     friend double norm(const Matrix& mat);
 
@@ -58,6 +64,12 @@ public:
 
     // Sobrecarga del operador de igual (=)
     bool operator==(const Matrix other) const;
+
+    // Sobrecarga del operador de parentesis () para acceder
+    double operator()(int i, int j) const;
+
+    // Sobrecarga del operador de parentesis () para modificar
+    double& operator()(int i, int j) ;
 
 
 

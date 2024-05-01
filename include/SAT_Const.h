@@ -2,8 +2,8 @@
 // Created by adperem on 24/04/2024.
 //
 
-#ifndef PROYECTOTALLER1_CONST_H
-#define PROYECTOTALLER1_CONST_H
+#ifndef PROYECTOTALLER1_SAT_CONST_H
+#define PROYECTOTALLER1_SAT_CONST_H
 
 //--------------------------------------------------------------------------
 //
@@ -13,7 +13,7 @@
 //
 //--------------------------------------------------------------------------
 
-class Const{
+class SAT_Const{
 public:
     // Mathematical constants
     static constexpr double pi        = 3.14159265358979326; // pi
@@ -57,4 +57,4 @@ public:
 };
 
 
-#endif //PROYECTOTALLER1_CONST_H
+#endif //PROYECTOTALLER1_SAT_CONST_H
