@@ -259,5 +259,14 @@ bool Matrix::equals(Matrix mat) {
     return true; // Todas las posiciones coinciden
 }
 
+// Método para imprimir la matriz por pantalla
+void Matrix::print() const {
+    for (int i = 1; i <= this->rows; i++) {
+        for (int j = 1; j <= this->cols; j++) {
+            std::cout << this->getElement(i,j) << " ";
+        }
+        std::cout << std::endl;
+    }
+}
 
 

@@ -27,7 +27,10 @@ add_executable(proyectoTaller1
         include/Mjday_TDB.h
         include/NutAngles.h
         include/Position.h
-
+        include/sign_.h
+        include/timediff.h
+        include/unit.h
+        include/PoleMatrix.h
 
 
 
@@ -53,6 +56,10 @@ add_executable(proyectoTaller1
         src/Mjday_TDB.cpp
         src/NutAngles.cpp
         src/Position.cpp
+        src/sign_.cpp
+        src/unit.cpp
+        src/timediff.cpp
+        src/PoleMatrix.cpp
 
 
         #test/testAzElPa.cpp
@@ -70,13 +77,11 @@ add_executable(proyectoTaller1
         #test/testMeanObliquity.cpp
         #test/testMjday.cpp
         #test/testMjday_TDB.cpp
-        test/testPosition.cpp
-        include/sign_.h
-        src/sign_.cpp
-        test/testSign_.cpp
-        src/timediff.cpp
-        include/timediff.h
-        src/testTimediff.cpp
+        #test/testPosition.cpp
+        #test/testSign_.cpp
+        #test/testTimediff.cpp
+        #test/testUnit.cpp
+        test/testPoleMatrix.cpp
 
 
 )

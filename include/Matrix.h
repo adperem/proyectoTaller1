@@ -33,6 +33,9 @@ public:
     // Devuelve la fila
     Matrix getRow(int row);
 
+    //Muestra la matriz por pantall
+    void print() const;
+
     // Método estático para calcular la norma de la matriz
     friend double norm(const Matrix& mat);
 
