@@ -71,6 +71,9 @@ add_executable(proyectoTaller1
         #test/testMjday.cpp
         #test/testMjday_TDB.cpp
         test/testPosition.cpp
+        include/sign_.h
+        src/sign_.cpp
+        test/testSign_.cpp
 
 
 )
