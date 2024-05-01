@@ -23,7 +23,7 @@ add_executable(proyectoTaller1
         include/Legendre.h
         include/IERS.h
         include/MeanObliquity.h
-
+        include/Mjday.h
 
 
 
@@ -47,7 +47,7 @@ add_executable(proyectoTaller1
         src/IERS.cpp
         src/Legendre.cpp
         src/MeanObliquity.cpp
-
+        src/Mjday.cpp
 
 
 
@@ -63,7 +63,8 @@ add_executable(proyectoTaller1
         #test/testGeodetic.cpp
         #test/testIERS.cpp
         #test/testLegendre.cpp
-        test/testMeanObliquity.cpp
+        #test/testMeanObliquity.cpp
+        test/testMjday.cpp
 
 
 )
