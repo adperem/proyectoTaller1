@@ -41,7 +41,7 @@ add_executable(proyectoTaller1
         include/PrecMatrix.h
         include/TimeUpdate.h
         include/doubler.h
-
+        #include/VarEqn.h
 
         src/Accel.cpp
         src/AccelPointMass.cpp
@@ -79,7 +79,8 @@ add_executable(proyectoTaller1
         src/nutMatrix.cpp
         src/TimeUpdate.cpp
         src/doubler.cpp
-
+        test/testPrecMatrix.cpp
+        #src/VarEqn.cpp
         #test/testAzElPa.cpp
         #test/testCheb3D.cpp
         #test/testEccAnom.cpp
@@ -106,7 +107,7 @@ add_executable(proyectoTaller1
         #test/testGast.cpp
         #test/testGHAMatrix.cpp
         #test/testNutMatrix.cpp
-        test/testTimeUpdate.cpp
+        #test/testTimeUpdate.cpp
 
 
-        src/VarEqn.cpp include/VarEqn.h)
+         )
