@@ -22,4 +22,5 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+void NutAngles (double Mjd_TT, double& dpsi, double& deps);
 #endif //PROYECTOTALLER1_NUTANGLES_H
