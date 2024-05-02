@@ -90,6 +90,8 @@ public:
 
     // Crear una matriz identidad del mismo tamaño que mat
     friend Matrix identity(double tam);
+    // Método para hacer una copia de la matriz
+    Matrix Matrix::copy() const
 
 
 };
