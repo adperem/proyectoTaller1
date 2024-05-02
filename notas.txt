@@ -1,6 +1,7 @@
 falta test para NutAngles
 falta test para MeasUpdate
 falta test para TimeUpdate
+falta test para doubler
 
 preguntar erron con test Pole Matrix
 

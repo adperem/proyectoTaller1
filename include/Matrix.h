@@ -90,8 +90,13 @@ public:
 
     // Crear una matriz identidad del mismo tamaño que mat
     friend Matrix identity(double tam);
+
     // Método para hacer una copia de la matriz
-    Matrix Matrix::copy() const
+    Matrix copy() const;
+
+    // Método para el producto cruzado
+    friend Matrix cross(const Matrix& mat1, const Matrix& mat2);
+
 
 
 };
@@ -110,4 +115,5 @@ Matrix inverse(const Matrix &mat);
 
 Matrix identity(double tam);
 
+Matrix cross(const Matrix& mat1, const Matrix& mat2);
 #endif //PROYECTOTALLER1_MATRIX_H

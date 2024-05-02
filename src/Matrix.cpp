@@ -387,6 +387,7 @@ Matrix identity(double tam) {
             ident(i, j) = (i == j) ? 1.0 : 0.0;
         }
     }
+    return ident;
 }
 
 // Método para copiar una matriz
@@ -402,3 +403,26 @@ Matrix Matrix::copy() const {
     return copia;
 }
 
+Matrix cross(const Matrix& mat1, const Matrix& mat2) {
+    // Comprobación de que ambas matrices son vectores de 3 dimensiones
+    if (mat1.numCols() != 3 || mat2.numCols() != 3 || mat1.numRows() != 1 || mat2.numRows() != 1) {
+        std::cerr << "Error: Ambas matrices deben ser vectores de 3 dimensiones." << std::endl;
+        exit(1);
+    }
+
+    // Obtiene los valores de los vectores
+    double x1 = mat1(1, 1), y1 = mat1(1, 2), z1 = mat1(1, 3);
+    double x2 = mat2(1, 1), y2 = mat2(1, 2), z2 = mat2(1, 3);
+
+    // Calcula los componentes del producto cruzado
+    double x = y1 * z2 - z1 * y2;
+    double y = z1 * x2 - x1 * z2;
+    double z = x1 * y2 - y1 * x2;
+
+    // Crea y devuelve la matriz resultado
+    Matrix result(1, 3);
+    result(1, 1) = x;
+    result(1, 2) = y;
+    result(1, 3) = z;
+    return result;
+}

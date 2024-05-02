@@ -40,6 +40,7 @@ add_executable(proyectoTaller1
         include/nutMatrix.h
         include/PrecMatrix.h
         include/TimeUpdate.h
+        include/doubler.h
 
 
         src/Accel.cpp
@@ -77,6 +78,7 @@ add_executable(proyectoTaller1
         src/PrecMatrix.cpp
         src/nutMatrix.cpp
         src/TimeUpdate.cpp
+        src/doubler.cpp
 
         #test/testAzElPa.cpp
         #test/testCheb3D.cpp
@@ -107,4 +109,4 @@ add_executable(proyectoTaller1
         test/testTimeUpdate.cpp
 
 
-)
+         )

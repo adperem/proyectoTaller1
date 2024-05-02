@@ -4,9 +4,12 @@
 #include "PoleMatrix.h"
 #include "cassert"
 #include "iostream"
+#include "cmath"
+
 
 int main() {
     Matrix matrix = PoleMatrix(30, 75);
+
     Matrix esperada(3, 3);
     esperada(1, 1) = 0.154251;
     esperada(1, 2) = 0.383141;
@@ -20,7 +23,7 @@ int main() {
 
     for (int i = 1; i <= matrix.numRows(); i++) {
         for (int j = 1; j <= matrix.numCols(); j++) {
-            assert(matrix(i,j) == esperada(i,j));
+            assert(fabs(matrix(i,j) - esperada(i,j))<1e-6);
         }
     }
     std::cout << "Test pasado con éxito" << std::endl;
