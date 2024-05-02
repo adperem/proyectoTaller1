@@ -389,5 +389,16 @@ Matrix identity(double tam) {
     }
 }
 
+// Método para copiar una matriz
+Matrix Matrix::copy() const {
+    Matrix copia(cols, rows);
 
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            copia.data[j][i] = data[i][j];
+        }
+    }
+
+    return copia;
+}
 
