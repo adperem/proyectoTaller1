@@ -269,4 +269,110 @@ void Matrix::print() const {
     }
 }
 
+// Función para calcular la inversa de una matriz
+Matrix inverse(const Matrix& mat) {
+    // Verificar si la matriz es cuadrada
+    if (mat.numRows() != mat.numCols()) {
+        throw std::invalid_argument("La matriz debe ser cuadrada para calcular su inversa.");
+    }
+
+    // Crear una matriz identidad del mismo tamaño que mat
+    Matrix identity(mat.numRows(), mat.numCols());
+    for (int i = 1; i <= mat.numRows(); ++i) {
+        for (int j = 1; j <= mat.numCols(); ++j) {
+            identity(i, j) = (i == j) ? 1.0 : 0.0;
+        }
+    }
+
+    // Realizar eliminación gaussiana para obtener la matriz inversa
+    Matrix augmented = mat;
+    augmented = concatenate(augmented,identity);
+
+    // Realizar eliminación gaussiana
+    for (int i = 1; i <= augmented.numRows(); ++i) {
+        // Encontrar el pivote
+        double pivot = augmented(i, i);
+
+        // Si el pivote es cero, intercambiar filas
+        if (pivot == 0.0) {
+            throw std::invalid_argument("La matriz no tiene inversa.");
+        }
+
+        // Normalizar la fila para hacer el pivote 1
+        for (int j = 1; j <= augmented.numCols(); ++j) {
+            augmented(i, j) /= pivot;
+        }
+
+        // Eliminar elementos por debajo del pivote
+        for (int k = 1; k <= augmented.numRows(); ++k) {
+            if (k != i) {
+                double factor = augmented(k, i);
+                for (int j = 1; j <= augmented.numCols(); ++j) {
+                    augmented(k, j) -= factor * augmented(i, j);
+                }
+            }
+        }
+    }
+
+    // Extraer la matriz inversa de la parte derecha de la matriz aumentada
+    Matrix inverseMat(mat.numRows(), mat.numCols());
+    for (int i = 0; i < mat.numRows(); ++i) {
+        for (int j = 0; j < mat.numCols(); ++j) {
+            inverseMat(i, j) = augmented(i, j + mat.numCols());
+        }
+    }
+
+    return inverseMat;
+}
+
+// Método para concatenar dos matrices horizontalmente
+Matrix concatenate(const Matrix& mat1, const Matrix& mat2) {
+    if (mat1.numRows() != mat2.numRows()) {
+        throw std::invalid_argument("Las matrices deben tener el mismo número de filas para concatenarse.");
+    }
+
+    int newCols = mat1.numCols() + mat2.numCols();
+    Matrix result(mat1.numRows(), newCols);
+
+    // Copiar los elementos de la primera matriz
+    for (int i = 1; i <= mat1.numRows(); ++i) {
+        for (int j = 1; j <= mat1.numCols(); ++j) {
+            result(i, j) = mat1(i, j);
+        }
+    }
+
+    // Copiar los elementos de la segunda matriz
+    for (int i = 1; i <= mat2.numRows(); ++i) {
+        for (int j = 1; j <= mat2.numCols(); ++j) {
+            result(i, j + mat1.numCols()) = mat2(i, j);
+        }
+    }
+
+    return result;
+}
+
+// Método para calcular la transpuesta de la matriz
+Matrix Matrix::transpose() const {
+    Matrix transposed(cols, rows);
+
+    for (int i = 1; i <= rows; ++i) {
+        for (int j = 1; j <= cols; ++j) {
+            transposed.data[j][i] = data[i][j];
+        }
+    }
+
+    return transposed;
+}
+
+// Crear una matriz identidad del mismo tamaño que mat
+Matrix identity(double tam ){
+    Matrix ident(tam,tam);
+    for (int i = 1; i <= tam; ++i) {
+        for (int j = 1; j <= tam; ++j) {
+            ident(i, j) = (i == j) ? 1.0 : 0.0;
+        }
+    }
+}
+
+
 

@@ -9,7 +9,7 @@ class Matrix {
 private:
     int rows;
     int cols;
-    double** data;
+    double **data;
 
 public:
     // Constructor
@@ -37,32 +37,34 @@ public:
     void print() const;
 
     // Método estático para calcular la norma de la matriz
-    friend double norm(const Matrix& mat);
+    friend double norm(const Matrix &mat);
 
     // Método estático para calcular el producto escalar entre dos matrices
-    friend double dot(const Matrix& mat1, const Matrix& mat2);
+    friend double dot(const Matrix &mat1, const Matrix &mat2);
 
     // Método estático para dividir una matriz por un número
-    friend Matrix divide(const Matrix& mat, double divisor);
+    friend Matrix divide(const Matrix &mat, double divisor);
 
     // Método estático para multiplicar una matriz por un número
-    friend Matrix multiply(const Matrix& mat, double factor);
+    friend Matrix multiply(const Matrix &mat, double factor);
 
     // Método  para comparar si dos matrices son iguales
     bool equals(Matrix mat);
 
     // Sobrecarga del operador de suma (+)
-    Matrix operator+(const Matrix& other) const;
+    Matrix operator+(const Matrix &other) const;
 
     // Sobrecarga del operador de suma (-)
     Matrix operator-(const Matrix other) const;
 
     // Sobrecarga del operador de multiplicación (*)
-    Matrix operator*(const Matrix& other) const;
+    Matrix operator*(const Matrix &other) const;
+
     Matrix operator*(double multiplicando) const;
 
     // Sobrecarga del operador de multiplicación (/)
-    Matrix operator/(const Matrix& other) const;
+    Matrix operator/(const Matrix &other) const;
+
     Matrix operator/(double divisor) const;
 
     // Sobrecarga del operador de igual (=)
@@ -72,18 +74,35 @@ public:
     double operator()(int i, int j) const;
 
     // Sobrecarga del operador de parentesis () para modificar
-    double& operator()(int i, int j) ;
+    double &operator()(int i, int j);
 
+    // Método para concatenar dos matrices horizontalmente
+    friend Matrix concatenate(const Matrix &mat1, const Matrix &mat2);
+
+    // Función para calcular la inversa de una matriz
+    friend Matrix inverse(const Matrix &mat);
+
+    // Método para calcular la transpuesta de la matriz
+    Matrix transpose() const;
+
+    // Crear una matriz identidad del mismo tamaño que mat
+    friend Matrix identity(double tam);
 
 
 };
 
-double norm(const Matrix& mat);
+double norm(const Matrix &mat);
 
-double dot(const Matrix& mat1, const Matrix& mat2);
+double dot(const Matrix &mat1, const Matrix &mat2);
 
-Matrix divide(const Matrix& mat, double divisor);
+Matrix divide(const Matrix &mat, double divisor);
 
-Matrix multiply(const Matrix& mat, double factor);
+Matrix multiply(const Matrix &mat, double factor);
+
+Matrix concatenate(const Matrix &mat1, const Matrix &mat2);
+
+Matrix inverse(const Matrix &mat);
+
+Matrix identity(double tam);
 
 #endif //PROYECTOTALLER1_MATRIX_H
