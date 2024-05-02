@@ -35,7 +35,11 @@ add_executable(proyectoTaller1
         include/GHAMatrix.h
         include/gmst.h
         include/gast.h
-
+        include/AccelHarmonic.h
+        include/MeasUpdate.h
+        include/nutMatrix.h
+        include/PrecMatrix.h
+        include/TimeUpdate.h
 
 
         src/Accel.cpp
@@ -68,7 +72,11 @@ add_executable(proyectoTaller1
         src/GHAMatrix.cpp
         src/gmst.cpp
         src/gast.cpp
-
+        src/AccelHarmonic.cpp
+        src/MeasUpdate.cpp
+        src/PrecMatrix.cpp
+        src/nutMatrix.cpp
+        src/TimeUpdate.cpp
 
         #test/testAzElPa.cpp
         #test/testCheb3D.cpp
@@ -94,7 +102,9 @@ add_executable(proyectoTaller1
         #test/testEqnEquinox.cpp
         #test/testGmst.cpp
         #test/testGast.cpp
-        test/testGHAMatrix.cpp
+        #test/testGHAMatrix.cpp
+        #test/testNutMatrix.cpp
+        test/testTimeUpdate.cpp
 
 
 )

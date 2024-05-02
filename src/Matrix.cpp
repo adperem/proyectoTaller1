@@ -7,7 +7,7 @@
 
 Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
     // Reservar memoria para los datos de la matriz
-    data = new double*[rows];
+    data = new double *[rows];
     for (int i = 0; i < rows; ++i) {
         data[i] = new double[cols];
     }
@@ -20,7 +20,7 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
     }
 }
 
-    // Función para obtener el número de filas
+// Función para obtener el número de filas
 int Matrix::numRows() const {
     return rows;
 }
@@ -32,34 +32,34 @@ int Matrix::numCols() const {
 
 // Función para obtener un elemento de la matriz
 double Matrix::getElement(int row, int col) const {
-    return data[row-1][col-1];
+    return data[row - 1][col - 1];
 }
 
 // Función para establecer un elemento de la matriz
 void Matrix::setElement(int row, int col, double value) {
-    data[row-1][col-1] = value;
+    data[row - 1][col - 1] = value;
 }
 
 // Devuelve la columna
 Matrix Matrix::getColumn(int column) {
-    Matrix aux(this->rows,1);
-    for (int i = 1; i <= this->rows; i++){
-        aux(i,1) = this->getElement(i,column);
+    Matrix aux(this->rows, 1);
+    for (int i = 1; i <= this->rows; i++) {
+        aux(i, 1) = this->getElement(i, column);
     }
     return aux;
 }
 
 // Devuelve la fila
 Matrix Matrix::getRow(int row) {
-    Matrix aux(1,this->cols);
-    for (int i = 1; i <= this->cols; i++){
-        aux(1,1) = this->getElement(row,i);
+    Matrix aux(1, this->cols);
+    for (int i = 1; i <= this->cols; i++) {
+        aux(1, 1) = this->getElement(row, i);
     }
     return aux;
 }
 
 // Método estático para calcular la norma de la matriz
-double norm(const Matrix& mat) {
+double norm(const Matrix &mat) {
     double suma_cuadrados = 0.0;
 
     // Calcular la suma de los cuadrados de todos los elementos de la matriz
@@ -76,9 +76,10 @@ double norm(const Matrix& mat) {
 }
 
 // Método estático para calcular el producto escalar entre dos matrices
-double dot(const Matrix& mat1, const Matrix& mat2) {
+double dot(const Matrix &mat1, const Matrix &mat2) {
     if (mat1.rows != mat2.rows || mat1.cols != mat2.cols) {
-        throw std::invalid_argument("Las matrices deben tener las mismas dimensiones para calcular el producto escalar.");
+        throw std::invalid_argument(
+                "Las matrices deben tener las mismas dimensiones para calcular el producto escalar.");
     }
 
     double resultado = 0.0;
@@ -93,7 +94,7 @@ double dot(const Matrix& mat1, const Matrix& mat2) {
     return resultado;
 }
 
-Matrix Matrix::operator+(const Matrix& other) const {
+Matrix Matrix::operator+(const Matrix &other) const {
     if (rows != other.rows || cols != other.cols) {
         throw std::invalid_argument("Las matrices deben tener la misma dimensión para sumarse.");
     }
@@ -106,6 +107,17 @@ Matrix Matrix::operator+(const Matrix& other) const {
         }
     }
 
+    return result;
+}
+
+Matrix Matrix::operator+(const double &other) const {
+    Matrix result(this->numRows(), this->cols);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result.data[i][j] = this->data[i][j] + other;
+        }
+    }
     return result;
 }
 
@@ -125,9 +137,10 @@ Matrix Matrix::operator-(const Matrix other) const {
     return result;
 }
 
-Matrix Matrix::operator*(const Matrix& other) const {
+Matrix Matrix::operator*(const Matrix &other) const {
     if (cols != other.rows) {
-        throw std::invalid_argument("El número de columnas de la primera matriz debe ser igual al número de filas de la segunda matriz para multiplicarse.");
+        throw std::invalid_argument(
+                "El número de columnas de la primera matriz debe ser igual al número de filas de la segunda matriz para multiplicarse.");
     }
 
     Matrix result(rows, other.cols);
@@ -155,9 +168,10 @@ Matrix Matrix::operator*(double multiplicando) const {
     return result;
 }
 
-Matrix Matrix::operator/(const Matrix& other) const {
+Matrix Matrix::operator/(const Matrix &other) const {
     if (cols != other.rows) {
-        throw std::invalid_argument("El número de columnas de la primera matriz debe ser igual al número de filas de la segunda matriz para multiplicarse.");
+        throw std::invalid_argument(
+                "El número de columnas de la primera matriz debe ser igual al número de filas de la segunda matriz para multiplicarse.");
     }
 
     Matrix result(rows, other.cols);
@@ -184,6 +198,7 @@ Matrix Matrix::operator/(double divisor) const {
 
     return result;
 }
+
 bool Matrix::operator==(const Matrix other) const {
     if (rows != other.rows || cols != other.cols) {
         return false; // Las matrices tienen diferentes dimensiones
@@ -207,7 +222,7 @@ double Matrix::operator()(int i, int j) const {
 }
 
 // Overload operator() to access and modify elements directly
-double&  Matrix::operator()(int i, int j) {
+double &Matrix::operator()(int i, int j) {
     if (i < 1 || i > rows || j < 1 || j > cols) {
         throw std::out_of_range("Index out of range.");
     }
@@ -215,7 +230,7 @@ double&  Matrix::operator()(int i, int j) {
 }
 
 // Método estático para dividir una matriz por un número
- Matrix divide(const Matrix& mat, double divisor) {
+Matrix divide(const Matrix &mat, double divisor) {
     Matrix resultado(mat.rows, mat.cols);
 
     // Dividir cada elemento de la matriz por el divisor
@@ -229,7 +244,7 @@ double&  Matrix::operator()(int i, int j) {
 }
 
 // Método estático para multiplicar una matriz por un número
- Matrix multiply(const Matrix& mat, double factor) {
+Matrix multiply(const Matrix &mat, double factor) {
     Matrix resultado(mat.rows, mat.cols);
 
     // Multiplicar cada elemento de la matriz por el factor
@@ -251,7 +266,7 @@ bool Matrix::equals(Matrix mat) {
     for (int i = 1; i <= rows; ++i) {
         for (int j = 1; j <= cols; ++j) {
             if (getElement(i, j) != mat.getElement(i, j)) {
-                std::cout<< "Los elementos en la posición ("<<i<<","<< j<<") son diferentes"<<std::endl;
+                std::cout << "Los elementos en la posición (" << i << "," << j << ") son diferentes" << std::endl;
                 return false; // Los elementos en la posición (i, j) son diferentes
             }
         }
@@ -263,14 +278,14 @@ bool Matrix::equals(Matrix mat) {
 void Matrix::print() const {
     for (int i = 1; i <= this->rows; i++) {
         for (int j = 1; j <= this->cols; j++) {
-            std::cout << this->getElement(i,j) << " ";
+            std::cout << this->getElement(i, j) << " ";
         }
         std::cout << std::endl;
     }
 }
 
 // Función para calcular la inversa de una matriz
-Matrix inverse(const Matrix& mat) {
+Matrix inverse(const Matrix &mat) {
     // Verificar si la matriz es cuadrada
     if (mat.numRows() != mat.numCols()) {
         throw std::invalid_argument("La matriz debe ser cuadrada para calcular su inversa.");
@@ -286,7 +301,7 @@ Matrix inverse(const Matrix& mat) {
 
     // Realizar eliminación gaussiana para obtener la matriz inversa
     Matrix augmented = mat;
-    augmented = concatenate(augmented,identity);
+    augmented = concatenate(augmented, identity);
 
     // Realizar eliminación gaussiana
     for (int i = 1; i <= augmented.numRows(); ++i) {
@@ -316,8 +331,8 @@ Matrix inverse(const Matrix& mat) {
 
     // Extraer la matriz inversa de la parte derecha de la matriz aumentada
     Matrix inverseMat(mat.numRows(), mat.numCols());
-    for (int i = 0; i < mat.numRows(); ++i) {
-        for (int j = 0; j < mat.numCols(); ++j) {
+    for (int i = 1; i <= mat.numRows(); ++i) {
+        for (int j = 1; j <= mat.numCols(); ++j) {
             inverseMat(i, j) = augmented(i, j + mat.numCols());
         }
     }
@@ -326,7 +341,7 @@ Matrix inverse(const Matrix& mat) {
 }
 
 // Método para concatenar dos matrices horizontalmente
-Matrix concatenate(const Matrix& mat1, const Matrix& mat2) {
+Matrix concatenate(const Matrix &mat1, const Matrix &mat2) {
     if (mat1.numRows() != mat2.numRows()) {
         throw std::invalid_argument("Las matrices deben tener el mismo número de filas para concatenarse.");
     }
@@ -355,8 +370,8 @@ Matrix concatenate(const Matrix& mat1, const Matrix& mat2) {
 Matrix Matrix::transpose() const {
     Matrix transposed(cols, rows);
 
-    for (int i = 1; i <= rows; ++i) {
-        for (int j = 1; j <= cols; ++j) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             transposed.data[j][i] = data[i][j];
         }
     }
@@ -365,8 +380,8 @@ Matrix Matrix::transpose() const {
 }
 
 // Crear una matriz identidad del mismo tamaño que mat
-Matrix identity(double tam ){
-    Matrix ident(tam,tam);
+Matrix identity(double tam) {
+    Matrix ident(tam, tam);
     for (int i = 1; i <= tam; ++i) {
         for (int j = 1; j <= tam; ++j) {
             ident(i, j) = (i == j) ? 1.0 : 0.0;

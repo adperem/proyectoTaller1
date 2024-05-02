@@ -54,6 +54,9 @@ public:
     // Sobrecarga del operador de suma (+)
     Matrix operator+(const Matrix &other) const;
 
+    // Sobrecarga del operador de suma (+)
+    Matrix operator+(const double &other) const;
+
     // Sobrecarga del operador de suma (-)
     Matrix operator-(const Matrix other) const;
 
