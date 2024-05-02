@@ -32,6 +32,9 @@ add_executable(proyectoTaller1
         include/unit.h
         include/PoleMatrix.h
         include/EqnEquinox.h
+        include/GHAMatrix.h
+        include/gmst.h
+        include/gast.h
 
 
 
@@ -62,6 +65,9 @@ add_executable(proyectoTaller1
         src/timediff.cpp
         src/PoleMatrix.cpp
         src/EqnEquinox.cpp
+        src/GHAMatrix.cpp
+        src/gmst.cpp
+        src/gast.cpp
 
 
         #test/testAzElPa.cpp
@@ -85,7 +91,10 @@ add_executable(proyectoTaller1
         #test/testUnit.cpp
         #test/testPoleMatrix.cpp
         #test/testNutAngles.cpp
-        test/testEqnEquinox.cpp
+        #test/testEqnEquinox.cpp
+        #test/testGmst.cpp
+        #test/testGast.cpp
+        test/testGHAMatrix.cpp
 
 
 )
