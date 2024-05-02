@@ -1,8 +1,7 @@
 falta test para NutAngles
 falta test para MeasUpdate
-falta test para TimeUpdate
 falta test para doubler
 
-preguntar erron con test Pole Matrix
 
-En AccelHarmonic usa Cnm Snm que son varialbes globales de EKF_GEOS3.m (preguntar)
+
+En AccelHarmonic usa Cnm Snm que son varialbes globales de EKF_GEOS3.m (Hay q leer del fichero, dejar pa el final)

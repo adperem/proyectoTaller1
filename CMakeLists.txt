@@ -109,4 +109,4 @@ add_executable(proyectoTaller1
         test/testTimeUpdate.cpp
 
 
-         )
+        src/VarEqn.cpp include/VarEqn.h)
