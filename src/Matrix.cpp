@@ -60,6 +60,7 @@ Matrix Matrix::getRow(int row) {
 
 // Método estático para calcular la norma de la matriz
 double norm(const Matrix &mat) {
+	//TODO:Lanzar excepcion si no tiene una fila
     double suma_cuadrados = 0.0;
 
     // Calcular la suma de los cuadrados de todos los elementos de la matriz
