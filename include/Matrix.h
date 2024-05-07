@@ -64,6 +64,7 @@ public:
     Matrix operator*(const Matrix &other) const;
 
     Matrix operator*(double multiplicando) const;
+    //TODO: Hacerla funcion amiga
 
     // Sobrecarga del operador de multiplicación (/)
     Matrix operator/(const Matrix &other) const;
