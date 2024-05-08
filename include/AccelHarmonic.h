@@ -27,4 +27,5 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+Matrix AccelHarmonic(Matrix r,Matrix E,int n_max,int m_max);
 #endif //PROYECTOTALLER1_ACCELHARMONIC_H
