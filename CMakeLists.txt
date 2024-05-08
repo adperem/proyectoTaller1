@@ -111,6 +111,10 @@ add_executable(proyectoTaller1
         test/testPrecMatrix.cpp
         src/elements.cpp
         include/elements.h
+        src/gibbs.cpp
+        include/gibbs.h
+        test/testElements.cpp
+        include/EKF_GEOS3.h
 
 
 )
