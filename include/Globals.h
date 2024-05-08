@@ -9,9 +9,17 @@
 #include <iostream>
 #include <fstream>
 
+struct AuxParam {
+    double Mjd_UTC,Mjd_TT;
+    int n;
+    int m;
+};
+
 class Globals{
 public:
-    static Matrix *eopdata;
+    static AuxParam auxParam;
+    static Matrix eopdata;
+
 
     static void eop19620101(int c);
 };
