@@ -3,6 +3,7 @@
 //
 #include <fstream>
 #include "EKF_GEOS3.h"
+#include "Globals.h"
 
 //--------------------------------------------------------------------------
 //
@@ -19,12 +20,6 @@
 //
 // Last modified:   2020/03/16   Meysam Mahooti
 //--------------------------------------------------------------------------
-struct AuxParam {
-    double Mjd_UTC;
-    int n;
-    int m;
-};
-
 int main() {
     Matrix Cnm = Matrix(181, 181);
     Matrix Snm = Matrix(181, 181);
@@ -43,7 +38,7 @@ int main() {
     }
 
     // Model parameters
-    AuxParam auxParam = {0, 0, 0};
+    auxParam = {0, 0, 0};
 
     // read Earth orientation parameters
     std::ifstream fid_eop("eop19620101.txt");

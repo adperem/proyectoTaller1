@@ -117,4 +117,4 @@ add_executable(proyectoTaller1
         include/EKF_GEOS3.h
 
 
-)
+        include/VarEqn.h src/VarEqn.cpp src/G_AccelHarmonic.cpp include/G_AccelHarmonic.h)

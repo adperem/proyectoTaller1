@@ -3,12 +3,12 @@
 //
 #include "MeasUpdate.h"
 
-void MeasUpdate(Matrix& x, Matrix z, Matrix g, Matrix s, Matrix G, Matrix& P, double n, Matrix &K){
-    double m = z.numCols();
+void MeasUpdate(Matrix& x, double z, double g, double s, Matrix G, Matrix& P, double n, Matrix &K){
+    double m = 1;
     Matrix Inv_W (m, m);
 
     for (int i = 1; i <= m ; ++i) {
-        Inv_W(i,i) = s(1,i)*s(1,i);    // Inverse weight (measurement covariance)
+        Inv_W(i,i) = s*s;    // Inverse weight (measurement covariance)
     }
 
     // Kalman gain

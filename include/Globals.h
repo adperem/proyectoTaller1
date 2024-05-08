@@ -19,9 +19,12 @@ class Globals{
 public:
     static AuxParam auxParam;
     static Matrix eopdata;
+    static Matrix Cnm;
+    static Matrix Snm;
 
 
     static void eop19620101(int c);
+    static void GEO(int c);
 };
 
 #endif //PROYECTOTALLER1_GLOBALS_H
