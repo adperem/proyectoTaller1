@@ -7,6 +7,7 @@
 #include "Matrix.h"
 #include "cmath"
 #include "Legendre.h"
+#include "Globals.h"
 //--------------------------------------------------------------------------
 //
 // AccelHarmonic.m
