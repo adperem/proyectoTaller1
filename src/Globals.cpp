@@ -1,28 +1,26 @@
 //
 // Created by adperem on 24/04/2024.
 //
-/*
 #include "Globals.h"
 
 
-Matrix *Globals::eopdata;
 
-void Globals::eop19620101(int c){
-    Globals::eopdata = new Matrix(13,c);
+void Globals::eop19620101(){
+    Globals::eopdata(21413,13);
 
-    File *fid = fopen("../data/eop19620101.txt","r");
-    if (fid == NULL){
-        printf("Error!!");
-        exit(EXIT_FAILURE);
+    std::ifstream file("eop19620101.txt");
+    if (!file.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo." << std::endl;
     }
 
-    for (int i = 0; i<= 0; i++){
-        fscanf(fid,"%i %d %d %i %f %f %f %f %f %f %f %f %i",
-               &((*Globals::eopdata).setElement(1,i)));
+    // Leer los datos del archivo y almacenarlos en la matriz
+    for (int i = 1; i <= 21413; ++i) {
+        for (int j = 1; j <= 13; ++j) {
+            double value;
+            file >> value;
+            eopdata(i, j) = value;
+        }
     }
 
-    fid.close()
-
-
+    file.close();
 }
- */

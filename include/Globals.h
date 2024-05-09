@@ -23,7 +23,7 @@ public:
     static Matrix Snm;
 
 
-    static void eop19620101(int c);
+    static void eop19620101();
     static void GEO(int c);
 };
 
