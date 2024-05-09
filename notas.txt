@@ -1,9 +1,9 @@
-falta test para NutAngles
-falta test para MeasUpdate
-falta test para doubler
-falta test para elements
-falta test para VarEqn
-falta test para AccelHarmonic
+[+] falta test para NutAngles
+[+] falta test para MeasUpdate
+[+] falta test para doubler
+[+] falta test para elements
+[+] falta test para VarEqn
+[+] falta test para AccelHarmonic
 
 
 
@@ -12,3 +12,36 @@ En AccelHarmonic usa Cnm Snm que son varialbes globales de EKF_GEOS3.m (Hay q le
 Falta G_AccelHArmonic
 
 VarEQN esta mal( zeros(3) es matrix(3,3))
+
+
+
+void DEInteg(func,t,tout,relerr,abserr,n_eqn,y){
+    ...
+    ode(...)
+    ...
+}
+
+roots de matalb sustituir por rpoly de http://crbond.com/downloads/rpoly.cpp
+void root(double *coef, MAtrix real, Matrix img){
+    ...
+    rpoly(...)
+    ...
+}
+
+[+] Para leer Geos.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
