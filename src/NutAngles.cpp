@@ -5,7 +5,7 @@
 #include "NutAngles.h"
 void NutAngles (double Mjd_TT, double& dpsi, double& deps){
 
-    double T  = (Mjd_TT-SAT_Const::MJD_J2000)/36525;
+    double T  = (Mjd_TT-(SAT_Const::MJD_J2000))/36525;
     double T2 = T*T;
     double T3 = T2*T;
     double rev = 360*3600; // arcsec/revolution
@@ -140,12 +140,12 @@ void NutAngles (double Mjd_TT, double& dpsi, double& deps){
     dpsi = 0;
     deps = 0;
 
-    for (int i = 1; i <= N_coeff; ++i) {
-        double arg = (C(i,1) * l + C(i,2) * lp + C(i,3) * F + C(i,4) * D + C(i,5) * Om) / SAT_Const::Arcs;
+    for (int i = 1; i <= N_coeff; ++i) {            
+        double arg = (C(i,1) * l + C(i,2) * lp + C(i,3) * F + C(i,4) * D + C(i,5) * Om) / (SAT_Const::Arcs);
         dpsi += (C(i,6) + C(i,7) * T) * sin(arg);
         deps += (C(i,8) + C(i,9) * T) * cos(arg);
     }
 
-    dpsi = 1.0e-5 * dpsi/SAT_Const::Arcs;
-    deps = 1.0e-5 * deps/SAT_Const::Arcs;
+    dpsi = 1.0e-5 * dpsi/(SAT_Const::Arcs);
+    deps = 1.0e-5 * deps/(SAT_Const::Arcs);
 }
