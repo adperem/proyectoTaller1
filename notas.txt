@@ -6,7 +6,6 @@
 [+] falta test para AccelHarmonic
 
 
-
 En AccelHarmonic usa Cnm Snm que son varialbes globales de EKF_GEOS3.m (Hay q leer del fichero, dejar pa el final)
 
 Falta G_AccelHArmonic

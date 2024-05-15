@@ -98,6 +98,10 @@ public:
     // Método para el producto cruzado
     friend Matrix cross(const Matrix& mat1, const Matrix& mat2);
 
+    // Método para copiar matrices
+    friend Matrix copyMatrix(const Matrix& original);
+
+
 
 
 };
@@ -117,4 +121,6 @@ Matrix inverse(const Matrix &mat);
 Matrix identity(double tam);
 
 Matrix cross(const Matrix& mat1, const Matrix& mat2);
+
+Matrix copyMatrix(const Matrix& original);
 #endif //PROYECTOTALLER1_MATRIX_H

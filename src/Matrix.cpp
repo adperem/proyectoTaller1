@@ -391,18 +391,6 @@ Matrix identity(double tam) {
     return ident;
 }
 
-// Método para copiar una matriz
-Matrix Matrix::copy() const {
-    Matrix copia(cols, rows);
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            copia.data[j][i] = data[i][j];
-        }
-    }
-
-    return copia;
-}
 
 Matrix cross(const Matrix& mat1, const Matrix& mat2) {
     // Comprobación de que ambas matrices son vectores de 3 dimensiones
@@ -426,4 +414,21 @@ Matrix cross(const Matrix& mat1, const Matrix& mat2) {
     result(1, 2) = y;
     result(1, 3) = z;
     return result;
+}
+
+Matrix copyMatrix(const Matrix &original) {
+    int numRows = original.numRows();
+    int numCols = original.numCols();
+
+    // Crear una nueva matriz para almacenar la copia
+    Matrix copy(numRows, numCols);
+
+    // Copiar los elementos de la matriz original a la copia
+    for (int i = 1; i <= numRows; ++i) {
+        for (int j = 1; j <= numCols; ++j) {
+            copy(i, j) = original(i, j);
+        }
+    }
+
+    return copy;
 }
