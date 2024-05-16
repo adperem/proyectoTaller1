@@ -25,4 +25,6 @@
 // Last modified:   2018/01/11   M. Mahooti
 //
 //--------------------------------------------------------------------------
+void JPL_Eph_DE430(double Mjd_TDB, Matrix &r_Mercury, Matrix &r_Venus, Matrix &r_Earth, Matrix &r_Mars, Matrix &r_Jupiter,
+                   Matrix &r_Saturn, Matrix &r_Uranus, Matrix &r_Neptune, Matrix &r_Pluto, Matrix &r_Moon, Matrix &r_Sun);
 #endif //PROYECTOTALLER1_JPL_EPH_DE430_H
