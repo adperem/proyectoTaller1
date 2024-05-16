@@ -4,6 +4,11 @@
 [+] falta test para elements
 [+] falta test para VarEqn
 [+] falta test para AccelHarmonic
+[-] TOL 1e-10
+
+[*] AccelHarmonic devuleve vector columna
+[*] G_AccelHarmonic devulve matriz 3x3
+
 
 
 En AccelHarmonic usa Cnm Snm que son varialbes globales de EKF_GEOS3.m (Hay q leer del fichero, dejar pa el final)

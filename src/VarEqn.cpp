@@ -21,19 +21,19 @@ Matrix VarEqn(double x, Matrix yPhi){
     // State vector components
     Matrix r(1, 3);
     for (int i = 1; i <= 3; ++i) {
-        r(1, i) = yPhi(1, i);
+        r(1, i) = yPhi(i, 1);
     }
 
     Matrix v(1, 3);
     for (int i = 1; i <= 3; ++i) {
-        v(1, i) = yPhi(1, i + 3);
+        v(1, i) = yPhi(i + 3, 1);
     }
     Matrix Phi(6, 6);
 
     // State transition matrix
     for (int j = 1; j <= 6; ++j) {
         for (int i = 1; i <= 6; ++i) {
-            Phi(i, j) = yPhi(1, 6 * (j - 1) + i);
+            Phi(i, j) = yPhi(6 * (j - 1) + i, 1);
         }
     }
 
@@ -43,7 +43,7 @@ Matrix VarEqn(double x, Matrix yPhi){
 
     // Time derivative of state transition matrix
     Matrix yPhip = Matrix(42,1);
-    Matrix dfdy = Matrix(1,6);
+    Matrix dfdy = Matrix(6,6);
 
     for (int i = 1; i <= 3; ++i) {
         for (int j = 1; j <= 3; ++j) {
@@ -59,12 +59,12 @@ Matrix VarEqn(double x, Matrix yPhi){
     }
     Matrix Phip = dfdy*Phi;
     for (int i = 1; i <= 3; ++i) {
-        yPhip(1,i) = v(1,i);    // dr/dt(i)
-        yPhip(1,i + 3) = a(1,i);    // dv/dt(i)
+        yPhip(i,1) = v(i,1);    // dr/dt(i)
+        yPhip(i + 3,1) = a(i,1);    // dv/dt(i)
     }
     for (int i = 1; i <= 6; ++i) {
         for (int j = 1; j <= 6; ++j) {
-            yPhip(1,6*j+i) = Phip(i,j);     // dPhi/dt(i,j)
+            yPhip(6*j+i,1) = Phip(i,j);     // dPhi/dt(i,j)
         }
     }
     return yPhip;
