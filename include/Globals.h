@@ -25,6 +25,7 @@ public:
 
     static void eop19620101();
     static void GEO(int c);
+
 };
 
 #endif //PROYECTOTALLER1_GLOBALS_H

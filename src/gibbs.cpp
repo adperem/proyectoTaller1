@@ -2,7 +2,7 @@
 // Created by perez on 03/05/2024.
 //
 #include "gibbs.h"
-
+/*
 void gibbs(Matrix r1, Matrix r2, Matrix r3, Matrix v2, double theta, double theta1, double copa, std::string error) {
 
     double small= 0.00000001;
@@ -26,3 +26,4 @@ void gibbs(Matrix r1, Matrix r2, Matrix r3, Matrix v2, double theta, double thet
 
 }
 
+*/

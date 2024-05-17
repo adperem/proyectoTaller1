@@ -1,8 +1,9 @@
 //
 // Created by adperem on 08/05/2024.
 //
+
 #include "G_AccelHarmonic.h"
-Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
+Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){/*
     double d = 1.0;   // Position increment [m]
 
     Matrix G(3,3);
@@ -22,5 +23,5 @@ Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
         }
     }
 
-
+*/
 }

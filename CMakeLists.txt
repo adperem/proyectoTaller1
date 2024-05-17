@@ -41,6 +41,13 @@ add_executable(proyectoTaller1
         include/PrecMatrix.h
         include/TimeUpdate.h
         include/doubler.h
+        include/elements.h
+        include/JPL_Eph_DE430.h
+        include/gibbs.h
+        include/VarEqn.h
+        #include/EKF_GEOS3.h
+        include/G_AccelHarmonic.h
+        include/DEInteg.h
 
 
         src/Accel.cpp
@@ -56,7 +63,7 @@ add_executable(proyectoTaller1
         src/R_y.cpp
         src/R_z.cpp
         src/Geodetic.cpp
-        src/EKF_GEOS3.cpp
+        #src/EKF_GEOS3.cpp
         src/Globals.cpp
         src/IERS.cpp
         src/Legendre.cpp
@@ -79,6 +86,12 @@ add_executable(proyectoTaller1
         src/nutMatrix.cpp
         src/TimeUpdate.cpp
         src/doubler.cpp
+        src/JPL_Eph_DE430.cpp
+        src/DEInteg.cpp
+        src/gibbs.cpp
+        src/elements.cpp
+        src/VarEqn.cpp
+        src/G_AccelHarmonic.cpp
 
 
         #test/testAzElPa.cpp
@@ -108,13 +121,9 @@ add_executable(proyectoTaller1
         #test/testGHAMatrix.cpp
         #test/testNutMatrix.cpp
         #test/testTimeUpdate.cpp
-        test/testPrecMatrix.cpp
-        src/elements.cpp
-        include/elements.h
-        src/gibbs.cpp
-        include/gibbs.h
-        test/testElements.cpp
-        include/EKF_GEOS3.h
+        #test/testPrecMatrix.cpp
+        #test/testElements.cpp
+        #test/testVarEqn.cpp
+        test/testAccelHarmonic.cpp
 
-
-        include/VarEqn.h src/VarEqn.cpp src/G_AccelHarmonic.cpp include/G_AccelHarmonic.h src/JPL_Eph_DE430.cpp include/JPL_Eph_DE430.h test/testVarEqn.cpp)
+)

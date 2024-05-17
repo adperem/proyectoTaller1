@@ -4,7 +4,7 @@
 #include "VarEqn.h"
 
 
-Matrix VarEqn(double x, Matrix yPhi){
+Matrix VarEqn(double x, Matrix yPhi){/*
     double x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC;
     IERS(Globals::eopdata , Globals::auxParam.Mjd_UTC,'l', x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC);
 
@@ -67,6 +67,7 @@ Matrix VarEqn(double x, Matrix yPhi){
             yPhip(6*j+i,1) = Phip(i,j);     // dPhi/dt(i,j)
         }
     }
-    return yPhip;
+    return yPhip;*/
+    return Matrix(42,1);
 }
 

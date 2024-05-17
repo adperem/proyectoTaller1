@@ -20,7 +20,7 @@
 //
 // Last modified:   2020/03/16   Meysam Mahooti
 //--------------------------------------------------------------------------
-int main() {
+int main() {/*
     Matrix Cnm = Matrix(181, 181);
     Matrix Snm = Matrix(181, 181);
     std::ifstream fid("GGM03S.txt");
@@ -59,5 +59,5 @@ int main() {
         eopdata.push_back(row);
     }
     fid_eop.close();
-
+*/
 }
