@@ -115,7 +115,7 @@ add_executable(proyectoTaller1
         #test/testTimediff.cpp
         #test/testUnit.cpp
         #test/testPoleMatrix.cpp
-        test/testNutAngles.cpp
+        #test/testNutAngles.cpp
         #test/testEqnEquinox.cpp
         #test/testGmst.cpp
         #test/testGast.cpp
@@ -123,7 +123,8 @@ add_executable(proyectoTaller1
         #test/testNutMatrix.cpp
         #test/testTimeUpdate.cpp
         #test/testPrecMatrix.cpp
-        #test/testElements.cpp
+        test/testElements.cpp
+        test/testMeasUpdate.cpp
         #test/testVarEqn.cpp
         #test/testAccelHarmonic.cpp
         #test/TestAccel.cpp
