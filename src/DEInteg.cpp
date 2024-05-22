@@ -21,7 +21,7 @@ double min(int n1, int n2) {
 }
 
 void
-DEInteg(Matrix (*func)(double, Matrix), double t, double tout, double relerr, double abserr, double n_eqn, Matrix &y) {
+DEInteg(Matrix (*func)(double, Matrix), double t, double tout, double relerr, double abserr, double n_eqn, Matrix y,Matrix &exit) {
 
 
 

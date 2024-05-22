@@ -23,4 +23,6 @@
 //   Freeman and Comp., San Francisco (1975).
 //
 //----------------------------------------------------------------------------
+void
+DEInteg(Matrix (*func)(double, Matrix), double t, double tout, double relerr, double abserr, double n_eqn, Matrix y, Matrix &exit);
 #endif //PROYECTOTALLER1_DEINTEG_H

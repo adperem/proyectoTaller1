@@ -5,6 +5,7 @@
 [+] falta test para VarEqn
 [+] falta test para AccelHarmonic
 [+] falta test para DEInteg
+[+] falta test para G_AccelHarmonic
 
 [-] TOL 1e-10
 

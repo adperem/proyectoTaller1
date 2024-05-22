@@ -4,8 +4,10 @@
 
 #ifndef PROYECTOTALLER1_AZELPA_H
 #define PROYECTOTALLER1_AZELPA_H
+
 #include "Matrix.h"
 #include <math.h>
+
 //--------------------------------------------------------------------------
 //
 // Purpose:
@@ -23,5 +25,6 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
-void AzElPa(double& Az, double& El, Matrix& dAds, Matrix& dEds, Matrix s);
+void AzElPa(Matrix s, double &Az, double &El, Matrix &dAds, Matrix &dEds);
+
 #endif //PROYECTOTALLER1_AZELPA_H

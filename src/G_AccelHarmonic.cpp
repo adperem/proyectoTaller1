@@ -3,7 +3,7 @@
 //
 
 #include "G_AccelHarmonic.h"
-Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){/*
+Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
     double d = 1.0;   // Position increment [m]
 
     Matrix G(3,3);
@@ -17,11 +17,12 @@ Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){/*
         // Acceleration difference
         Matrix da = AccelHarmonic ( r+dr/2,U, n_max, m_max ) - AccelHarmonic ( r-dr/2,U, n_max, m_max );
         // Derivative with respect to i-th axis
-        G(:,i) = da/d;
-        for (int j = 1; j <= G.numRows(); ++j) {
-            G(j, i) = da_dd(j); // Suponiendo que 'da_dd' es el vector de derivadas de 'a' respecto a 'd'
+
+        for (int row = 1; row <= 3; ++row) {
+            G(row, i) = da(row, 1) / d;
         }
+
     }
 
-*/
+
 }

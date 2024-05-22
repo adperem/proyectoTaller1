@@ -9,5 +9,5 @@
  * z es un vector
  * s es un vector
  */
-void MeasUpdate(Matrix& x, Matrix z, Matrix g, Matrix s, Matrix G, Matrix& P, double n, Matrix &K);
+void MeasUpdate(Matrix& x, double z, double g, double s, Matrix G, Matrix& P, double n, Matrix &K);
 #endif //PROYECTOTALLER1_MEASUPDATE_H

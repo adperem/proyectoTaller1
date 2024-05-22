@@ -15,8 +15,8 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
     // Auxiliary quantities
     double d = norm(r_bf);                     // distance
-    double latgc = asin(r_bf(1, 3) / d);
-    double lon = atan2(r_bf(1, 2), r_bf(1, 1));
+    double latgc = asin(r_bf(3, 1) / d);
+    double lon = atan2(r_bf(2, 1), r_bf(1, 1));
 
     Matrix pnm(0, 0), dpnm(0, 0);
     Legendre(n_max, m_max, latgc, pnm, dpnm);
@@ -30,11 +30,11 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
         double b3 = (gm / d) * pow((r_ref / d), n);
         for (int m = 0; m < m_max; ++m) {
             q1 = q1 + pnm(n + 1, m + 1) *
-                      (Globals::Cnm(n + 1, m + 1) * cos(m * lon) + Globals::Snm(n + 1, m + 1) * sin(m * lon));
+                      ((*Globals::Cnm)(n + 1, m + 1) * cos(m * lon) + (*Globals::Snm)(n + 1, m + 1) * sin(m * lon));
             q2 = q2 + dpnm(n + 1, m + 1) *
-                      (Globals::Cnm(n + 1, m + 1) * cos(m * lon) + Globals::Snm(n + 1, m + 1) * sin(m * lon));
+                      ((*Globals::Cnm)(n + 1, m + 1) * cos(m * lon) + (*Globals::Snm)(n + 1, m + 1) * sin(m * lon));
             q3 = q3 + m * pnm(n + 1, m + 1) *
-                      (Globals::Snm(n + 1, m + 1) * cos(m * lon) - Globals::Cnm(n + 1, m + 1) * sin(m * lon));
+                      ((*Globals::Snm)(n + 1, m + 1) * cos(m * lon) - (*Globals::Cnm)(n + 1, m + 1) * sin(m * lon));
         }
         dUdr = dUdr + q1 * b1;
         dUdlatgc = dUdlatgc + q2 * b2;
@@ -44,11 +44,11 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
         q1 = q2;
     }
     // Body-fixed acceleration
-    double r2xy = r_bf(1,1)*r_bf(1,1) + r_bf(1,2)*r_bf(1,2);
+    double r2xy = r_bf(1,1)*r_bf(1,1) + r_bf(2,1)*r_bf(2,1);
 
-    double ax = (1 / d * dUdr - r_bf(1,3) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(1,1) - (1 / r2xy * dUdlon) * r_bf(1,2);
-    double ay = (1 / d * dUdr - r_bf(1,3) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(1,2) + (1 / r2xy * dUdlon) * r_bf(1,1);
-    double az = 1 / d * dUdr * r_bf(1,3) + sqrt(r2xy) / (d*d) * dUdlatgc;
+    double ax = (1 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(1,1) - (1 / r2xy * dUdlon) * r_bf(2,1);
+    double ay = (1 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(2,1) + (1 / r2xy * dUdlon) * r_bf(1,1);
+    double az = 1 / d * dUdr * r_bf(3,1) + sqrt(r2xy) / (d*d) * dUdlatgc;
 
     Matrix a_bf(1,3);
     a_bf(1,1) = ax;

@@ -53,7 +53,7 @@ Matrix Matrix::getColumn(int column) {
 Matrix Matrix::getRow(int row) {
     Matrix aux(1, this->cols);
     for (int i = 1; i <= this->cols; i++) {
-        aux(1, 1) = this->getElement(row, i);
+        aux(1, i) = this->getElement(row, i);
     }
     return aux;
 }
@@ -225,7 +225,7 @@ double Matrix::operator()(int i, int j) const {
 // Overload operator() to access and modify elements directly
 double &Matrix::operator()(int i, int j) {
     if (i < 1 || i > rows || j < 1 || j > cols) {
-        throw std::out_of_range("Index out of range.");
+        throw std::out_of_range("Index out of range. ");
     }
     return data[i - 1][j - 1];
 }

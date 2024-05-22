@@ -25,5 +25,5 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
-Matrix G_AccelHarmonic( Matrix r, Matrix U, int n_max, int m_max );
+Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max );
 #endif //PROYECTOTALLER1_G_ACCELHARMONIC_H

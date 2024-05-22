@@ -1,5 +1,5 @@
 #include "AzElPa.h"
-void AzElPa(double& Az, double& El, Matrix& dAds, Matrix& dEds, Matrix s){
+void AzElPa(Matrix s, double &Az, double &El, Matrix &dAds, Matrix &dEds){
     double pi2 = 2.0*M_PI;
     double rho = sqrt(s.getElement(1,1)*s.getElement(1,1)*s.getElement(1,2)*s.getElement(1,2));
 
