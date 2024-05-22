@@ -21,19 +21,19 @@ Matrix VarEqn(double x, Matrix yPhi){
     // State vector components
     Matrix r(1, 3);
     for (int i = 1; i <= 3; ++i) {
-        r(1, i) = yPhi(i, 1);
+        r(1, i) = yPhi(1, i);
     }
 
     Matrix v(1, 3);
     for (int i = 1; i <= 3; ++i) {
-        v(1, i) = yPhi(i + 3, 1);
+        v(1, i) = yPhi( 1,i + 3);
     }
     Matrix Phi(6, 6);
 
     // State transition matrix
     for (int j = 1; j <= 6; ++j) {
         for (int i = 1; i <= 6; ++i) {
-            Phi(i, j) = yPhi(6 * (j - 1) + i, 1);
+            Phi(i, j) = yPhi( 1,6 * (j - 1) + i);
         }
     }
 

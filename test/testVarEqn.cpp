@@ -5,8 +5,11 @@
 #include "cassert"
 #include "cmath"
 #include "iostream"
+#include "Globals.h"
 
 int main() {
+    Globals::eop19620101();
+
 
     Matrix yPhi(1, 42);
     yPhi(1, 1) = 0.765516788149002;
