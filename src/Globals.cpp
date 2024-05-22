@@ -31,32 +31,23 @@ void Globals::eop19620101(){
 }
 
 void Globals::CnmSnm() {
+    double dummy;
     Globals::Cnm = new Matrix(181,181);
     Globals::Snm = new Matrix(181,181);
 
-    std::ifstream fid("../data/GGM03S.txt");
-    if (!fid.is_open()) {
+    FILE *fp4 = fopen("../data/GGM03S.txt", "r");
+    if (fp4==NULL) {
         std::cerr << "Error al abrir el archivo GGM03S.txt" << std::endl;
     }
 
     for (int n = 0; n <= 180; ++n) {
         for (int m = 0; m <= n; ++m) {
-            int temp_n, temp_m;
-            double temp[6];
-            fid >> temp_n >> temp_m >> temp[0] >> temp[1] >> temp[2] >> temp[3];
-
-            if (fid.fail()) {
-                std::cerr << "Error al leer los datos" << std::endl;
-            }
-
-            (*Globals::Snm)(n + 1, m + 1) = temp[2];
-            (*Globals::Snm)(n + 1, m + 1) = temp[3];
+            fscanf(fp4,"%lf %lf %lf %lf %lf %lf",
+                   &dummy, &dummy, &((*Globals::Cnm)(n + 1, m + 1)), &((*Globals::Snm)(n + 1, m + 1)), &dummy, &dummy);
 
         }
     }
-
-
-    fid.close();
+    fclose(fp4);
 }
 
 void Globals::PCLoad() {

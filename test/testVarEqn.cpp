@@ -9,6 +9,8 @@
 
 int main() {
     Globals::eop19620101();
+    Globals::CnmSnm();
+    //Globals::ObsLoad();
 
 
     Matrix yPhi(1, 42);
@@ -101,9 +103,9 @@ int main() {
     expected(1, 41) = -6.14925883169389e+145;
     expected(1, 42) = -1.22301543783734e+146;
     for (int i = 1; i <= 42; ++i) {
-        for (int j = 1; j < 42; ++j) {
-            assert(fabs(resutl(i, j) == expected(i, j)) < 1e-10);
-        }
+        std::cout<< resutl(i,1 ) <<" , "<< expected(1, i)<<std::endl;
+        assert(fabs(resutl(i,1 ) - expected(1, i)) < 1e-10);
+
     }
     std::cout << "Test testVarEqn passed" << std::endl;
 

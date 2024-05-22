@@ -33,7 +33,7 @@ int main() {
     expected(3, 1) = -2.86933544780688;
 
     for (int i = 1; i <= 3; ++i) {
-        assert(fabs(result(i, 1) - expected(i, 1)) < 1e-5);
+        assert(fabs(result(i, 1) - expected(i, 1)) < 1e-6);
     }
     printf("Test pasado con extito");
     return 0;

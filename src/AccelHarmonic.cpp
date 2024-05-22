@@ -23,12 +23,12 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
     Matrix pnm(0, 0), dpnm(0, 0);
     Legendre(n_max, m_max, latgc, pnm, dpnm);
 
-    double dUdr = 0;
-    double dUdlatgc = 0;
-    double dUdlon = 0;
-    double q1 = 0;
-    double q2 = 0;
-    double q3 = 0;
+    double dUdr = 0.0;
+    double dUdlatgc = 0.0;
+    double dUdlon = 0.0;
+    double q1 = 0.0;
+    double q2 = 0.0;
+    double q3 = 0.0;
 
 
     for (int n = 0; n <= n_max; ++n) {
@@ -46,16 +46,16 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
         dUdr = dUdr + q1 * b1;
         dUdlatgc = dUdlatgc + q2 * b2;
         dUdlon = dUdlon + q3 * b3;
-        q3 = 0;
+        q3 = 0.0;
         q2 = q3;
         q1 = q2;
     }
     // Body-fixed acceleration
     double r2xy = r_bf(1,1)*r_bf(1,1) + r_bf(2,1)*r_bf(2,1);
 
-    double ax = (1 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(1,1) - (1 / r2xy * dUdlon) * r_bf(2,1);
-    double ay = (1 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(2,1) + (1 / r2xy * dUdlon) * r_bf(1,1);
-    double az = 1 / d * dUdr * r_bf(3,1) + sqrt(r2xy) / (d*d) * dUdlatgc;
+    double ax = (1.0 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(1,1) - (1.0 / r2xy * dUdlon) * r_bf(2,1);
+    double ay = (1.0 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(2,1) + (1.0 / r2xy * dUdlon) * r_bf(1,1);
+    double az = 1.0 / d * dUdr * r_bf(3,1) + sqrt(r2xy) / (d*d) * dUdlatgc;
 
     Matrix a_bf(1,3);
     a_bf(1,1) = ax;
