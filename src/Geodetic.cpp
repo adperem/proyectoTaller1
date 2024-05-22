@@ -2,17 +2,6 @@
 // Created by perez on 01/05/2024.
 //
 #include "Geodetic.h"
-//--------------------------------------------------------------------------
-//
-// Geodetic.m
-//
-// Purpose:
-//   geodetic coordinates (Longitude [rad], latitude [rad], altitude [m])
-//   from given position vector (r [m])
-//
-// Last modified:   2015/08/12   M. Mahooti
-//
-//--------------------------------------------------------------------------
 void Geodetic(Matrix r, double& lon, double& lat, double& h){
     double R_equ = SAT_Const::R_Earth;
     double f = SAT_Const::f_Earth;

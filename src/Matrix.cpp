@@ -416,7 +416,7 @@ Matrix cross(const Matrix& mat1, const Matrix& mat2) {
     return result;
 }
 
-Matrix copyMatrix(const Matrix &original) {
+Matrix copy(const Matrix &original) {
     int numRows = original.numRows();
     int numCols = original.numCols();
 
@@ -431,4 +431,13 @@ Matrix copyMatrix(const Matrix &original) {
     }
 
     return copy;
+}
+
+Matrix::~Matrix() {
+    // Liberar la memoria asignada a los datos de la matriz
+    for (int i = 0; i < rows; ++i) {
+        delete[] data[i];
+    }
+    delete[] data;
+
 }

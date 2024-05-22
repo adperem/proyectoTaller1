@@ -1,3 +1,16 @@
+/**
+ * @brief Evalúa una interpolación de Chebyshev 3D en un punto dado.
+ *
+ * @param t Tiempo en el que se evalúa la interpolación.
+ * @param N Orden de la interpolación.
+ * @param Ta Tiempo inicial de la interpolación.
+ * @param Tb Tiempo final de la interpolación.
+ * @param Cx Coeficientes de Chebyshev para la dimensión x.
+ * @param Cy Coeficientes de Chebyshev para la dimensión y.
+ * @param Cz Coeficientes de Chebyshev para la dimensión z.
+ * @return Matriz que contiene las coordenadas x, y, z evaluadas en el tiempo t.
+ * @throw std::invalid_argument Si el tiempo t está fuera del rango [Ta, Tb].
+ */
 #include <stdexcept>
 #include "Cheb3D.h"
 

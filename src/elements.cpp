@@ -1,8 +1,18 @@
-//
-// Created by perez on 02/05/2024.
-//
+
 #include <cstdio>
 #include "elements.h"
+/**
+ * @brief Calcula los elementos orbitales a partir del vector de estado.
+ * @param y Vector de estado (posición y velocidad).
+ * @param p Semilatus rectum.
+ * @param a Semieje mayor.
+ * @param e Excentricidad.
+ * @param i Inclinación.
+ * @param Omega Longitud del nodo ascendente.
+ * @param omega Argumento del perihelio.
+ * @param M Anomalía media.
+ * Created by perez on 02/05/2024.
+ */
 
 void elements(Matrix y, double& p, double& a, double& e, double& i, double& Omega, double& omega, double& M) {
     double pi2 = 2.0 * M_PI;

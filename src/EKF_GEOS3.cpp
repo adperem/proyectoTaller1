@@ -10,7 +10,11 @@
 #include "TimeUpdate.h"
 #include "AzElPa.h"
 #include "MeasUpdate.h"
-
+/**
+ * @brief Extrae las matrices de transición de estado de la matriz de estado aumentada.
+ * @param yPhi Matriz de estado aumentada.
+ * @param Phi Matriz de transición de estado.
+ */
 void extractStateTransitionMatrices(const Matrix &yPhi, Matrix &Phi) {
     for (int j = 0; j < 6; ++j) {
         for (int i = 0; i < 6; ++i) {
@@ -34,6 +38,9 @@ void extractStateTransitionMatrices(const Matrix &yPhi, Matrix &Phi) {
 //
 // Last modified:   2020/03/16   Meysam Mahooti
 //--------------------------------------------------------------------------
+/**
+ * @brief Función principal para la determinación inicial de la órbita usando los métodos de Gauss y Filtro de Kalman Extendido.
+ */
 int main() {
     Globals::eop19620101();
     Globals::PCLoad();

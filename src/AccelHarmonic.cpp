@@ -1,13 +1,23 @@
 //
-// Created by perez on 02/05/2024.
 //
+//
+/**
+ * @brief Calcula la aceleración debido al campo gravitatorio armónico de la Tierra.
+ *
+ * @param r Posición del satélite en coordenadas inerciales (matriz de 3x1).
+ * @param E Matriz de transformación del sistema de coordenadas inerciales al sistema de coordenadas fijas en la Tierra.
+ * @param n_max Orden máximo del desarrollo armónico.
+ * @param m_max Grado máximo del desarrollo armónico.
+ * @return Matriz que contiene la aceleración del satélite en coordenadas inerciales (matriz de 3x1).
+ *
+ * Created by perez on 02/05/2024.
+ */
 #include "AccelHarmonic.h"
 #include "Globals.h"
 
 Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
 
-    std::cout << std::endl;
     double r_ref = 6378.1363e3;   // Earth's radius [m]; GGM03S
     double gm = 398600.4415e9; // [m^3/s^2]; GGM03S
 

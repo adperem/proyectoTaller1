@@ -12,16 +12,39 @@ struct DE_STATE {
     static const int DE_INVPARAM = 6;  // Invalid input parameters
 };
 
+/**
+ * @brief Función que devuelve el máximo de dos números.
+ * @param[in] d1 Primer número.
+ * @param[in] d2 Segundo número.
+ * @return El máximo de los dos números.
+ */
 double max(double d1, double d2) {
     return d1 > d2 ? d1 : d2;
 }
 
+/**
+ * @brief Función que devuelve el mínimo de dos números enteros.
+ * @param[in] n1 Primer número entero.
+ * @param[in] n2 Segundo número entero.
+ * @return El mínimo de los dos números enteros.
+ */
 double min(int n1, int n2) {
     return n1 < n2 ? n1 : n2;
 }
 
-void
-DEInteg(Matrix (*func)(double, Matrix), double t, double tout, double relerr, double abserr, double n_eqn, Matrix y,Matrix &exit) {
+/**
+ * @brief Función que realiza la integración de una EDO.
+ * @param[in] func Función que define la EDO.
+ * @param[in] t Tiempo inicial.
+ * @param[in] tout Tiempo objetivo.
+ * @param[in] relerr Tolerancia relativa.
+ * @param[in] abserr Tolerancia absoluta.
+ * @param[in] n_eqn Número de ecuaciones en el sistema.
+ * @param[in] y Vector de valores iniciales.
+ * @param[out] exit Estado de salida de la integración.
+ */
+void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
+        double relerr, double abserr, double n_eqn, Matrix y,Matrix &exit) {
 
 
 

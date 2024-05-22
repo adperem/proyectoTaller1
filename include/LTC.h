@@ -1,7 +1,3 @@
-//
-// Created by perez on 13/04/2024.
-//
-
 #ifndef PROYECTOTALLER1_LTC_H
 #define PROYECTOTALLER1_LTC_H
 #include "Matrix.h"
@@ -27,5 +23,12 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+/**
+ * @brief Computes the Local Tangent Coordinate (LTC) transformation matrix.
+ * @param lon Longitude in radians.
+ * @param lat Latitude in radians.
+ * @return Transformation matrix.
+ * Created by perez on 13/04/2024.
+ */
 Matrix LTC(double lon,double lat);
 #endif //PROYECTOTALLER1_LTC_H

@@ -1,19 +1,10 @@
 #include "EccAnom.h"
-//--------------------------------------------------------------------------
-//
-// Purpose:
-//   Computes the eccentric anomaly for elliptic orbits
-//
-// Inputs:
-//   M         Mean anomaly in [rad]
-//   e         Eccentricity of the orbit [0,1]
-//
-// Output:
-//             Eccentric anomaly in [rad]
-//
-// Last modified:   2015/08/12   M. Mahooti
-//
-//--------------------------------------------------------------------------
+/**
+ * @brief Function to calculate the eccentric anomaly given mean anomaly and eccentricity.
+ * @param M Mean anomaly.
+ * @param e Eccentricity.
+ * @return Eccentric anomaly.
+ */
 double EccAnom(double M, double e) {
     int maxit = 15;
     int i = 1;

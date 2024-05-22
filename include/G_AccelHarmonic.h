@@ -1,7 +1,3 @@
-//
-// Created by adperem on 08/05/2024.
-//
-
 #ifndef PROYECTOTALLER1_G_ACCELHARMONIC_H
 #define PROYECTOTALLER1_G_ACCELHARMONIC_H
 #include "Matrix.h"
@@ -25,5 +21,14 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+/**
+ * @brief Calcula la matriz de gradiente de la aceleración gravitatoria.
+ * @param r Vector de posición.
+ * @param U Matriz de transformación a coordenadas geocéntricas.
+ * @param n_max Orden máximo de la serie esférica.
+ * @param m_max Término máximo de la serie esférica.
+ * @return La matriz de gradiente de la aceleración gravitatoria.
+ * Created by adperem on 08/05/2024.
+ */
 Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max );
 #endif //PROYECTOTALLER1_G_ACCELHARMONIC_H

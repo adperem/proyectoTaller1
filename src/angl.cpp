@@ -1,3 +1,10 @@
+/**
+ * @brief Calcula el ángulo entre dos vectores.
+ *
+ * @param vec1 Primer vector (matriz de 3x1).
+ * @param vec2 Segundo vector (matriz de 3x1).
+ * @return Ángulo entre los dos vectores en radianes.
+ */
 #include "angl.h"
 double angl (Matrix vec1,Matrix vec2){
 

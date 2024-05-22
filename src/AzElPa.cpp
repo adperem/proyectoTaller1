@@ -1,3 +1,12 @@
+/**
+ * @brief Calcula los ángulos de acimut y elevación a partir de un vector de posición.
+ *
+ * @param s Vector de posición del objeto observado (matriz de 1x3).
+ * @param Az Ángulo de acimut resultante (en radianes).
+ * @param El Ángulo de elevación resultante (en radianes).
+ * @param dAds Derivadas del ángulo de acimut respecto al vector de posición (matriz de 1x3).
+ * @param dEds Derivadas del ángulo de elevación respecto al vector de posición (matriz de 1x3).
+ */
 #include "AzElPa.h"
 void AzElPa(Matrix s, double &Az, double &El, Matrix &dAds, Matrix &dEds){
     double pi2 = 2.0*M_PI;

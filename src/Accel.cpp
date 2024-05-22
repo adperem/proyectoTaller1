@@ -1,5 +1,12 @@
 #include "Accel.h"
-
+/**
+ * @brief Calcula la aceleración de un satélite en función de varios parámetros astronómicos.
+ *
+ * @param x Tiempo en segundos desde la época de referencia.
+ * @param Y Matriz que contiene las posiciones y velocidades del satélite.
+ * @return Matriz que contiene las derivadas de las posiciones y velocidades del satélite.
+ * Creado por perez el 19/05/2024.
+ */
 
 // Created by perez on 19/05/2024.
 

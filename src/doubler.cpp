@@ -1,7 +1,37 @@
-//
-// Created by adperem on 02/05/2024.
-//
 #include "doubler.h"
+/**
+ * @file doubler.h
+ * @brief Header file containing the declaration of the doubler function.
+ *
+ */
+/**
+* @brief Function to perform orbital trajectory calculations.
+* @param cc1 Constant parameter.
+* @param cc2 Constant parameter.
+* @param magrsite1 Magnitude of position vector of the first site.
+* @param magrsite2 Magnitude of position vector of the second site.
+* @param magr1in Magnitude of position vector of the first point.
+* @param magr2in Magnitude of position vector of the second point.
+* @param los1 Matrix representing line of sight for the first point.
+* @param los2 Matrix representing line of sight for the second point.
+* @param los3 Matrix representing line of sight for the third point.
+* @param rsite1 Magnitude of the position vector for the first site.
+* @param rsite2 Magnitude of the position vector for the second site.
+* @param rsite3 Matrix representing the position vector for the third site.
+* @param t1 Time parameter for the first point.
+* @param t3 Time parameter for the third point.
+* @param direct Character flag indicating direction.
+* @param r2 Output parameter for the position vector of the second point.
+* @param r3 Output parameter for the position vector of the third point.
+* @param f1 Output parameter for the calculated value f1.
+* @param f2 Output parameter for the calculated value f2.
+* @param q1 Output parameter for the calculated value q1.
+* @param magr1 Output parameter for the magnitude of the position vector of the first point.
+* @param magr2 Output parameter for the magnitude of the position vector of the second point.
+* @param a Output parameter for the semi-major axis.
+* @param deltae32 Output parameter for the calculated value deltae32.
+ * Created by adperem on 02/05/2024.
+*/
 
 void doubler(double cc1, double cc2, double magrsite1, double magrsite2, double magr1in, double magr2in,
              Matrix los1, Matrix los2, Matrix los3, double rsite1, double rsite2, Matrix rsite3, double t1,

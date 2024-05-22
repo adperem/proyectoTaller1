@@ -1,5 +1,5 @@
 #include <math.h>
-#include "R_y.h"
+#include "R_z.h"
 Matrix R_z(double angle) {
     double C = cos(angle);
     double S = sin(angle);

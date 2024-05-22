@@ -16,7 +16,9 @@ struct AuxParam {
     bool sun = true, moon = true, planets = true;
     double Mjd_TT;
 };
-
+/**
+ * @brief Clase que almacena los datos globales necesarios para el cálculo.
+ */
 class Globals {
 public:
     static AuxParam auxParam;
@@ -26,15 +28,22 @@ public:
     static Matrix *PC;
     static Matrix *obs;
 
-
+    /**
+     * @brief Carga los datos de la matriz eopdata  .
+     */
     static void eop19620101();
-
+    /**
+     * @brief Carga los datos de las matrices Cnm y Snm  .
+     */
     static void CnmSnm();
-
+    /**
+     * @brief Carga los datos de la matriz PC  .
+     */
     static void PCLoad();
+    /**
+     * @brief Carga los datos de la matriz obs  .
+     */
     static void ObsLoad();
-
-    static void GEO(int c);
 
 };
 

@@ -1,7 +1,3 @@
-//
-// Created by perez on 02/05/2024.
-//
-
 #ifndef PROYECTOTALLER1_EQNEQUINOX_H
 #define PROYECTOTALLER1_EQNEQUINOX_H
 #include "MeanObliquity.h"
@@ -28,5 +24,11 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+/**
+ * @brief Calcula la ecuación de los equinoccios.
+ * @param Mjd_TT Fecha y tiempo (Tiempo Terrestre Modificado).
+ * @return La ecuación de los equinoccios.
+ * Created by perez on 02/05/2024.
+ */
 double EqnEquinox (double Mjd_TT);
 #endif //PROYECTOTALLER1_EQNEQUINOX_H

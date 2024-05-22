@@ -1,7 +1,3 @@
-//
-// Created by perez on 02/05/2024.
-//
-
 #ifndef PROYECTOTALLER1_PRECMATRIX_H
 #define PROYECTOTALLER1_PRECMATRIX_H
 #include "Matrix.h"
@@ -26,6 +22,14 @@
 // Last modified:   2015/08/12   M. Mahooti
 //
 //--------------------------------------------------------------------------
+
+/**
+ * @brief Calcula la matriz de precesión.
+ * @param Mjd_1 Fecha Juliana Modificada (MJD) .
+ * @param Mjd_2 Fecha Juliana Modificada (MJD) .
+ * @return La matriz de precesión.
+ * Created by perez on 02/05/2024.
+*/
 Matrix PrecMatrix (double Mjd_1,double Mjd_2);
 #endif //PROYECTOTALLER1_PRECMATRIX_H
 
