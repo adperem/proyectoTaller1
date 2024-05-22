@@ -7,11 +7,13 @@
 Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
 
+    std::cout << std::endl;
     double r_ref = 6378.1363e3;   // Earth's radius [m]; GGM03S
     double gm = 398600.4415e9; // [m^3/s^2]; GGM03S
 
     // Body-fixed position
     Matrix r_bf = E * r;
+
 
     // Auxiliary quantities
     double d = norm(r_bf);                     // distance
@@ -20,15 +22,20 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
     Matrix pnm(0, 0), dpnm(0, 0);
     Legendre(n_max, m_max, latgc, pnm, dpnm);
+
     double dUdr = 0;
     double dUdlatgc = 0;
     double dUdlon = 0;
-    double q3 = 0, q2 = q3, q1 = q2;
-    for (int n = 0; n < n_max; ++n) {
+    double q1 = 0;
+    double q2 = 0;
+    double q3 = 0;
+
+
+    for (int n = 0; n <= n_max; ++n) {
         double b1 = (-gm / pow(d, 2)) * pow((r_ref / d), n) * (n + 1);
         double b2 = (gm / d) * pow((r_ref / d), n);
         double b3 = (gm / d) * pow((r_ref / d), n);
-        for (int m = 0; m < m_max; ++m) {
+        for (int m = 0; m <= m_max; m++) {
             q1 = q1 + pnm(n + 1, m + 1) *
                       ((*Globals::Cnm)(n + 1, m + 1) * cos(m * lon) + (*Globals::Snm)(n + 1, m + 1) * sin(m * lon));
             q2 = q2 + dpnm(n + 1, m + 1) *
@@ -55,6 +62,7 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
     a_bf(1,2) = ay;
     a_bf(1,3) = az;
     a_bf = a_bf.transpose();
+
 
     // Inertial acceleration
     Matrix a = E.transpose()*a_bf;
