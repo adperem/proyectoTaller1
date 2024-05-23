@@ -1,4 +1,3 @@
-[+] falta test para MeasUpdate ( Error la matriz k )
 [-] falta test para doubler
 [-] falta test para elements ( da error fmod)
 [+] falta test para VarEqn

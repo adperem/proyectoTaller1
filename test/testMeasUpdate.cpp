@@ -79,8 +79,8 @@ int main() {
     xExpected(6, 1) =-7193.17204837765;
 
     for (int i = 1; i <= 6; ++i) {
-        assert(fabs(K(i, 1) - Kexpected(i, 1)) < 1e-6);
-        assert(fabs(x(i, 1) - xExpected(i, 1)) < 1e-6);
+        assert(fabs(K(i, 1) - Kexpected(i, 1)) < 1e-8);
+        assert(fabs(x(i, 1) - xExpected(i, 1)) < 1e-8);
         for (int j = 1; j <= 6; ++j) {
             assert(fabs(P(i, j) - Pexpected(i, j)) < 1e-6);
         }

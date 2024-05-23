@@ -6,8 +6,8 @@
 
 void Legendre(double n, double m, double fi, Matrix &pnm, Matrix &dpnm) {
 
-    pnm = Matrix(n + 1.0, m + 1.0);
-    dpnm = Matrix(n + 1.0, m + 1.0);
+    //pnm(n + 1.0, m + 1.0);
+    //dpnm(n + 1.0, m + 1.0);
 
     pnm(1, 1) = 1.0;
     dpnm(1, 1) = 0.0;

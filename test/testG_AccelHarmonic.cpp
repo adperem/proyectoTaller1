@@ -36,9 +36,10 @@ int main() {
     expected(3, 1) = 1.081693540072592e-06;
     expected(3, 2) = 0.0;
     expected(3, 3) = 0.0;
-    result.print();
-    for (int i = 1; i <= 3; ++i) {
+    //result.print();
 
+    for (int i = 1; i <= 3; ++i) {
+        //printf("%5.20lf",fabs(result(i, 1) - expected(i, 1)));
         assert(fabs(result(i, 1) - expected(i, 1)) < 1e-8);
     }
 

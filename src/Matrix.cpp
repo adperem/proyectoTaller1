@@ -215,6 +215,15 @@ bool Matrix::operator==(const Matrix other) const {
     return true; // Todas las posiciones coinciden
 }
 
+Matrix& Matrix::operator=(const Matrix& matrix2)
+{
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            this->data[i][j] = matrix2.data[i][j];
+
+    return *this;
+}
+
 double Matrix::operator()(int i, int j) const {
     if (i < 1 || i > rows || j < 1 || j > cols) {
         throw std::out_of_range("Index out of range.");

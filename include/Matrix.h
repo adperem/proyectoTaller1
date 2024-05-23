@@ -171,6 +171,8 @@ public:
       */
     bool operator==(const Matrix other) const;
 
+    Matrix& operator=(const Matrix& matrix2);
+
     /**
      * @brief Sobrecarga del operador de paréntesis () para acceso de elementos.
      * @param i Índice de la fila.

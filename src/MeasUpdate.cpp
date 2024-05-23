@@ -15,23 +15,9 @@ void MeasUpdate(Matrix& x, double z, double g, double s, Matrix G, Matrix& P, do
     // Kalman gain
 
 
-    K = P*G.transpose()*(1/(Inv_W+G*P*G.transpose())(1,1));
+    K = P*G.transpose()*(1.0/(Inv_W+G*P*G.transpose())(1,1));
 
-    /*
-    P.print();
-    printf("\n");
-    G.transpose().print();
-    printf("\n");
-     */
 
-    // State update
-    printf("%lf",K(1,1));printf("\n");
-    printf("%lf",K(2,1));printf("\n");
-    printf("%lf",K(3,1));printf("\n");
-    printf("%lf",K(4,1));printf("\n");
-    printf("%lf",K(5,1));printf("\n");
-    printf("%lf",K(6,1));printf("\n");
-    K.print();
     Matrix aux = K*(z-g);
     x = x+aux  ;
 

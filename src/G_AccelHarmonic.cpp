@@ -15,8 +15,17 @@ Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
         dr(3, 1);
         dr(i, 1) = d;
         // Acceleration difference
+        Matrix aux1 = AccelHarmonic ( r+dr/2.0,U, n_max, m_max );
+        aux1.print();
+        printf("\n");printf("\n");
+        //(r+dr/2.0).print();
+        Matrix aux2 = AccelHarmonic ( r-dr/2.0,U, n_max, m_max );
+        aux2.print();
+        printf("\n");printf("\n");
+        //(r-dr/2.0).print();
         Matrix da = AccelHarmonic ( r+dr/2.0,U, n_max, m_max ) - AccelHarmonic ( r-dr/2.0,U, n_max, m_max );
-        //da.print();
+        da.print();
+        printf("\n");
         // Derivative with respect to i-th axis
 
         for (int row = 1; row <= 3; row++) {
@@ -24,6 +33,7 @@ Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
         }
 
     }
+    //G.print();
     return G;
 
 
