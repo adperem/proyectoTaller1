@@ -11,10 +11,9 @@
 #include <fstream>
 
 struct AuxParam {
-    double Mjd_UTC = 4.974611128472211e+04;
+    double Mjd_TT, Mjd_UTC = 4.974611128472211e+04;
     int n = 20, m = 20;
     bool sun = true, moon = true, planets = true;
-    double Mjd_TT;
 };
 /**
  * @brief Clase que almacena los datos globales necesarios para el cálculo.

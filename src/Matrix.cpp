@@ -293,16 +293,12 @@ Matrix inverse(const Matrix &mat) {
     }
 
     // Crear una matriz identidad del mismo tamaño que mat
-    Matrix identity(mat.numRows(), mat.numCols());
-    for (int i = 1; i <= mat.numRows(); ++i) {
-        for (int j = 1; j <= mat.numCols(); ++j) {
-            identity(i, j) = (i == j) ? 1.0 : 0.0;
-        }
-    }
+    Matrix identidad = identity(mat.numRows());
+
 
     // Realizar eliminación gaussiana para obtener la matriz inversa
     Matrix augmented = mat;
-    augmented = concatenate(augmented, identity);
+    augmented = concatenate(augmented, identidad);
 
     // Realizar eliminación gaussiana
     for (int i = 1; i <= augmented.numRows(); ++i) {

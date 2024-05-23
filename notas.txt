@@ -1,6 +1,6 @@
-[+] falta test para MeasUpdate
-[+] falta test para doubler
-[+] falta test para elements ( da error fmod)
+[+] falta test para MeasUpdate ( Error la matriz k )
+[-] falta test para doubler
+[-] falta test para elements ( da error fmod)
 [+] falta test para VarEqn
 [+] falta test para DEInteg
 [+] falta test para G_AccelHarmonic

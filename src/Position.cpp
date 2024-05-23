@@ -2,6 +2,7 @@
 // Created by perez on 01/05/2024.
 //
 #include "Position.h"
+#include "SAT_Const.h"
 Matrix Position(double lon, double lat, double h){
     double R_equ = SAT_Const::R_Earth;
     double f     = SAT_Const::f_Earth;

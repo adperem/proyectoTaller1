@@ -15,7 +15,7 @@ Matrix Accel(double x, Matrix Y) {
     double x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC, UT1_TAI, UTC_GPS, UT1_GPS, TT_UTC, GPS_UTC;
     //double Mjd_UTC = 59000.5;
 
-    Matrix eopdata = *Globals::eopdata;
+    Matrix eopdata = (*Globals::eopdata);
     IERS(eopdata, Globals::auxParam.Mjd_UTC + x / 86400.0, 'l', x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC);
 
     timediff(UT1_UTC, TAI_UTC, UT1_TAI, UTC_GPS, UT1_GPS, TT_UTC, GPS_UTC);

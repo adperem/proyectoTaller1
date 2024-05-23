@@ -34,12 +34,10 @@ void Globals::CnmSnm() {
     double dummy;
     Globals::Cnm = new Matrix(181,181);
     Globals::Snm = new Matrix(181,181);
-
     FILE *fp4 = fopen("../data/GGM03S.txt", "r");
     if (fp4==NULL) {
         std::cerr << "Error al abrir el archivo GGM03S.txt" << std::endl;
     }
-
     for (int n = 0; n <= 180; ++n) {
         for (int m = 0; m <= n; ++m) {
             fscanf(fp4,"%lf %lf %lf %lf %lf %lf",

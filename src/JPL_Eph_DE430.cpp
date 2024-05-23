@@ -5,18 +5,6 @@
 #include "Globals.h"
 
 // Función para encontrar el índice de la primera fila donde se cumple la condición
-int findIndex(const Matrix &PC, double JD) {
-    int numRows = PC.numRows();
-
-    for (int i = 1; i <= numRows; ++i) {
-        if (PC(i, 1) <= JD && JD <= PC(i, 2)) {
-            return i; // Devolver el índice de la primera fila donde se cumple la condición
-        }
-    }
-
-    return -1; // Devolver -1 si no se encuentra ninguna fila que cumpla la condición
-}
-
 int findFirstMatchingIndex(const Matrix &PC, double JD) {
     int rows = PC.numRows();
 
@@ -304,11 +292,12 @@ JPL_Eph_DE430(double Mjd_TDB, Matrix &r_Mercury, Matrix &r_Venus, Matrix &r_Eart
     Matrix Cz_Pluto = extraer(PCtemp, temp(1, 3), temp(1, 4) - 1);
     j = 0;
     Mjd0 = t1;
-    r_Pluto = Cheb3D(Mjd_TDB, 6, Mjd0, Mjd0 + 32, extraer(Cx_Pluto, 6 * j + 1, 6 * j + 6),
-                     extraer(Cy_Pluto, 6 * j + 1, 6 * j + 6), extraer(Cz_Pluto, 6 * j + 1, 6 * j + 6)).transpose() *
+    r_Pluto = Cheb3D(Mjd_TDB, 6, Mjd0, Mjd0 + 32, extraer(Cx_Pluto, 6 * j + 1, 6 * j + 6.0),
+                     extraer(Cy_Pluto, 6.0 * j + 1, 6.0 * j + 6), extraer(Cz_Pluto, 6.0 * j + 1.0, 6.0 * j + 6.0)).transpose() *
               1e3;
 
     /*
+     * no hacia falta implementar esto
     temp(1, 3);
     for (int j = 819, i = 1; j <= 839; j = j + 10, i++) {
         temp(1, i) = j;
@@ -336,25 +325,25 @@ JPL_Eph_DE430(double Mjd_TDB, Matrix &r_Mercury, Matrix &r_Venus, Matrix &r_Eart
         j = 3;
         Mjd0 = t1 + 8 * j;
     }
-     No se usa
+
     Nutations = Cheb3D(Mjd_TDB, 10, Mjd0, Mjd0+8, Cx_Nutations(10*j+1:10*j+10),...
     Cy_Nutations(10*j+1:10*j+10),zeros(10,1))';
     */
 
     double EMRAT = 81.30056907419062; // DE430
-    double EMRAT1 = 1 / (1 + EMRAT);
+    double EMRAT1 = 1.0 / (1.0 + EMRAT);
     r_Earth = (r_Moon * EMRAT1) - r_Earth;
 
-    r_Mercury = (r_Earth * -1) + r_Mercury;
-    r_Mercury = (r_Earth * -1) + r_Mercury;
-    r_Venus = (r_Earth * -1) + r_Venus;
-    r_Mars = (r_Earth * -1) + r_Mars;
-    r_Jupiter = (r_Earth * -1) + r_Jupiter;
-    r_Saturn = (r_Earth * -1) + r_Saturn;
-    r_Uranus = (r_Earth * -1) + r_Uranus;
-    r_Neptune = (r_Earth * -1) + r_Neptune;
-    r_Pluto = (r_Earth * -1) + r_Pluto;
-    r_Sun = (r_Earth * -1) + r_Sun;
+    r_Mercury = (r_Earth * -1.0) + r_Mercury;
+    r_Mercury = (r_Earth * -1.0) + r_Mercury;
+    r_Venus = (r_Earth * -1.0) + r_Venus;
+    r_Mars = (r_Earth * -1.0) + r_Mars;
+    r_Jupiter = (r_Earth * -1.0) + r_Jupiter;
+    r_Saturn = (r_Earth * -1.0) + r_Saturn;
+    r_Uranus = (r_Earth * -1.0) + r_Uranus;
+    r_Neptune = (r_Earth * -1.0) + r_Neptune;
+    r_Pluto = (r_Earth * -1.0) + r_Pluto;
+    r_Sun = (r_Earth * -1.0) + r_Sun;
 
 
 }

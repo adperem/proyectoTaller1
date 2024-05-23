@@ -123,8 +123,9 @@ add_executable(proyectoTaller1
         #test/testNutMatrix.cpp
         #test/testTimeUpdate.cpp
         #test/testPrecMatrix.cpp
-        test/testElements.cpp
+        #test/testElements.cpp
         test/testMeasUpdate.cpp
+        test/testDEInteg.cpp
         #test/testVarEqn.cpp
         #test/testAccelHarmonic.cpp
         #test/TestAccel.cpp
