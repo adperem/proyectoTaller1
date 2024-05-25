@@ -52,7 +52,7 @@ void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
     double fouru = 4.0 * M_E;
 
     int State_ = DE_STATE::DE_INIT;
-    bool PermitTOUT = false;         // Allow integration past tout by default
+    bool PermitTOUT = true;         // Allow integration past tout by default
     double told = 0.0;
 
     // Powers of two (two(n)=2^n)
@@ -119,11 +119,11 @@ void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
     if ((State_ == DE_STATE::DE_INIT) || (!OldPermit) || (delsgn * del <= 0.0)) {
         // On start and restart also set the work variables x and yy(*),
         // store the direction of integration and initialize the step size
-        bool start = true;
-        double x = t;
-        Matrix yy = copy(y);
-        double delsgn = sign_(1.0, del);
-        double h = sign_(max(fouru * abs(x), abs(tout - x)), tout - x);
+        start = true;
+        x = t;
+        yy = copy(y);
+        delsgn = sign_(1.0, del);
+        h = sign_(max(fouru * abs(x), abs(tout - x)), tout - x);
     }
 
     double kold = 0.0, temp1 = 0.0, hi = 0.0, ki = 0.0, term = 0.0, psijm1 = 0.0, gamma = 0.0, eta = 0.0;

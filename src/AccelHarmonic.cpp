@@ -1,6 +1,3 @@
-//
-//
-//
 /**
  * @brief Calcula la aceleración debido al campo gravitatorio armónico de la Tierra.
  *
@@ -17,23 +14,15 @@
 
 Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
-    r.print();
-    printf("\n");
-
-    E.print();
-    printf("\n");
     double r_ref = 6378.1363e3;   // Earth's radius [m]; GGM03S
     double gm = 398600.4415e9; // [m^3/s^2]; GGM03S
 
     // Body-fixed position
     Matrix r_bf = E * r;
-    //r_bf.print();
-    //printf("\n");
 
 
     // Auxiliary quantities
     double d = norm(r_bf);                     // distance
-    //r_bf.print();
     double latgc = asin(r_bf(3, 1) / d);
     double lon = atan2(r_bf(2, 1), r_bf(1, 1));
 
@@ -68,8 +57,6 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
             q3 = q3 + m * pnm(n + 1, m + 1) *
                       ((*Globals::Snm)(n + 1, m + 1) * cos(m * lon) - (*Globals::Cnm)(n + 1, m + 1) * sin(m * lon));
         }
-        //printf("%5.20lf",q2);
-        //printf("\n");
         dUdr = dUdr + q1 * b1;
         dUdlatgc = dUdlatgc + q2 * b2;
         dUdlon = dUdlon + q3 * b3;
@@ -79,7 +66,7 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
     }
     // Body-fixed acceleration
 
-    r2xy = r_bf(1,1)*r_bf(1,1) + r_bf(2,1)*r_bf(2,1);
+    r2xy = pow(r_bf(1,1), 2) + pow(r_bf(2,1), 2);
 
     ax = (1.0 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(1,1) - (1.0 / r2xy * dUdlon) * r_bf(2,1);
     ay = (1.0 / d * dUdr - r_bf(3,1) / ((d*d) * sqrt(r2xy)) * dUdlatgc) * r_bf(2,1) + (1.0 / r2xy * dUdlon) * r_bf(1,1);
@@ -89,12 +76,9 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
     a_bf(1,1) = ax;
     a_bf(2,1) = ay;
     a_bf(3,1) = az;
-    //Matrix aux =a_bf.transpose();
-    //a_bf = a_bf.transpose();
+
 
 
     // Inertial acceleration
-
     return E.transpose()*a_bf;
-
 }

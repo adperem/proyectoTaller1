@@ -15,15 +15,25 @@ void MeasUpdate(Matrix& x, double z, double g, double s, Matrix G, Matrix& P, do
     // Kalman gain
 
 
+    Matrix Kaux = P*G.transpose()*(1.0/(Inv_W+G*P*G.transpose())(1,1));
 
-    K = P*G.transpose()*(1.0/(Inv_W+G*P*G.transpose())(1,1));
+    K(1,1) = Kaux(1,1);
+    K(2,1) = Kaux(2,1);
+    K(3,1) = Kaux(3,1);
+    K(4,1) = Kaux(4,1);
+    K(5,1) = Kaux(5,1);
+    K(6,1) = Kaux(6,1);
 
 
     Matrix aux = K*(z-g);
-    x = x+aux  ;
+
+    x = x+aux;
+
 
     // Covariance update
     P = (identity(n)-K*G)*P;
+
+
 }
 
 

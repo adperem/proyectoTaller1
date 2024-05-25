@@ -13,7 +13,6 @@
 Matrix Accel(double x, Matrix Y) {
 
     double x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC, UT1_TAI, UTC_GPS, UT1_GPS, TT_UTC, GPS_UTC;
-    //double Mjd_UTC = 59000.5;
 
     Matrix eopdata = (*Globals::eopdata);
     IERS(eopdata, Globals::auxParam.Mjd_UTC + x / 86400.0, 'l', x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC);
@@ -28,9 +27,9 @@ Matrix Accel(double x, Matrix Y) {
     Matrix E = PoleMatrix(x_pole, y_pole) * GHAMatrix(Mjd_UT1) * T;
 
     double MJD_TDB = Mjday_TDB(Mjd_TT);
-    Matrix r_Mercury(0, 0), r_Venus(0, 0), r_Earth(0, 0), r_Mars(0, 0), r_Jupiter(0, 0), r_Saturn(0, 0), r_Uranus(0,
-                                                                                                                  0), r_Neptune(
-            0, 0), r_Pluto(0, 0), r_Moon(0, 0), r_Sun(0, 0);
+    Matrix r_Mercury(3,1), r_Venus(3,1), r_Earth(3,1), r_Mars(3,1),
+            r_Jupiter(3,1), r_Saturn(3,1), r_Uranus(3,1), r_Neptune(3,1),
+            r_Pluto(3,1), r_Moon(3,1), r_Sun(3,1);
     JPL_Eph_DE430(MJD_TDB, r_Mercury, r_Venus, r_Earth, r_Mars, r_Jupiter, r_Saturn, r_Uranus, r_Neptune, r_Pluto,
                   r_Moon, r_Sun);
 
@@ -59,12 +58,13 @@ Matrix Accel(double x, Matrix Y) {
         a = a + AccelPointMass(aux, r_Pluto, SAT_Const::GM_Pluto);
     }
 
-    Matrix aux2(3, 1);
-    aux2(1, 1) = Y(4, 1);
-    aux2(2, 1) = Y(5, 1);
-    aux2(3, 1) = Y(6, 1);
-
-    Matrix dY = concatenate(aux2, a);
+    Matrix dY(6,1);
+    dY(1,1)=Y(4,1);
+    dY(2,1)=Y(5,1);
+    dY(3,1)=Y(6,1);
+    dY(4,1)=a(1,1);
+    dY(5,1)=a(2,1);
+    dY(6,1)=a(3,1);
     return dY;
 
 }

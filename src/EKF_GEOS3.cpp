@@ -48,7 +48,8 @@ int main() {
     Globals::CnmSnm();
     Globals::ObsLoad();
     Globals::auxParam = {0, 0, 0};
-    double nobs = 46;
+    int nobs = 46;
+
 
     double sigma_range = 92.5;          // [m]
     double sigma_az = 0.0224 * SAT_Const::Rad; // [rad]
@@ -220,12 +221,15 @@ int main() {
         Matrix dAds(1, 3), dEds(1, 3);
         double Azim, Elev;
         AzElPa(s, Azim, Elev, dAds, dEds);     // Azimuth, Elevation
+        ///dAds.print();
+        ///printf("\n");
         Matrix aux = dAds * LT * U;
         Matrix z(1, 3);
         Matrix dAdY = concatenate(aux, z);
 
         Matrix K(6, 1);
         MeasUpdate(Y, (*Globals::obs)(i, 2), Azim, sigma_az, dAdY, Paux, 6, K);
+
 
         // Elevation and partials
         r(1, 1) = Y(1, 1);

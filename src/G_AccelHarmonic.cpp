@@ -13,11 +13,12 @@ Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
     for (int i = 1; i <= 3 ; i++) {
         // Set offset in i-th component of the position vector
         dr(3, 1);
+        dr.print();
         dr(i, 1) = d;
         // Acceleration difference
         //Matrix aux1 = AccelHarmonic ( r+dr/2.0,U, n_max, m_max );
         //aux1.print();
-        printf("\n");printf("\n");
+        //printf("\n");printf("\n");
         //(r+dr/2.0).print();
         Matrix aux2 = AccelHarmonic ( r-dr/2.0,U, n_max, m_max );
         //aux2.print();
@@ -33,8 +34,5 @@ Matrix G_AccelHarmonic( Matrix r, Matrix U, double n_max, double m_max ){
         }
 
     }
-    //G.print();
     return G;
-
-
 }

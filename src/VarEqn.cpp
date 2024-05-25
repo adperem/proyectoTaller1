@@ -40,9 +40,6 @@ Matrix VarEqn(double x, Matrix yPhi){
     // Acceleration and gradient
     Matrix a = AccelHarmonic ( r, E, Globals::auxParam.n, Globals::auxParam.m );
     Matrix G = G_AccelHarmonic ( r, E, Globals::auxParam.n, Globals::auxParam.m );
-    r.print();
-    E.print();
-    G.print();
 
     // Time derivative of state transition matrix
     Matrix yPhip = Matrix(42,1);
@@ -71,6 +68,5 @@ Matrix VarEqn(double x, Matrix yPhi){
         }
     }
     return yPhip;
-    //return Matrix(42,1);
 }
 
