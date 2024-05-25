@@ -19,7 +19,7 @@ int main() {
     double p, a, e, i, Omega, omega, M;
     elements(y, p, a, e, i, Omega, omega, M);
 
-    printf("%5.20lf", fabs(Omega - 3.356710766508286));
+
     assert(fabs(p - 1.200169359721398e+07) < 1e-7);
     assert(fabs(a - 1.894392266071454e+07) < 1e-7);
     assert(fabs(e - 0.605361104987026) < 1e-7);

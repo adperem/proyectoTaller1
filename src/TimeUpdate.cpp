@@ -4,6 +4,5 @@
 #include "TimeUpdate.h"
 
 Matrix TimeUpdate(Matrix P, Matrix Phi, double Qdt) {
-    Matrix P_updated = Phi * P * Phi.transpose() + Qdt;
-    return P_updated;
+    return Phi * P * Phi.transpose() + Qdt;
 }

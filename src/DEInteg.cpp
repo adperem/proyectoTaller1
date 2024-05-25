@@ -1,6 +1,7 @@
 //
 // Created by perez on 17/05/2024.
 //
+#include <cstdio>
 #include "DEInteg.h"
 
 struct DE_STATE {
@@ -44,17 +45,15 @@ double min(int n1, int n2) {
  * @param[out] exit Estado de salida de la integración.
  */
 void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
-        double relerr, double abserr, double n_eqn, Matrix y,Matrix &exit) {
-
-
+        double relerr, double abserr, double n_eqn, Matrix& y) {
 
     // maxnum = 500;
-    double twou = 2 * M_E;
-    double fouru = 4 * M_E;
+    double twou = 2.0 * M_E;
+    double fouru = 4.0 * M_E;
 
     int State_ = DE_STATE::DE_INIT;
-    bool PermitTOUT = true;         // Allow integration past tout by default
-    double told = 0;
+    bool PermitTOUT = false;         // Allow integration past tout by default
+    double told = 0.0;
 
     // Powers of two (two(n)=2^n)
     double two[] = {10, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0, 256.0, 512.0, 1024.0, 2048.0, 4096.0, 8192.0};
@@ -106,8 +105,8 @@ void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
     double tend = t + 100.0 * del;
     if (!PermitTOUT) tend = tout;
 
-    double nostep = 0;
-    double kle4 = 0;
+    double nostep = 0.0;
+    double kle4 = 0.0;
     bool stiff = false;
     double releps = relerr / epsilon;
     double abseps = abserr / epsilon;
@@ -115,14 +114,14 @@ void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
     bool OldPermit = false;
     double delsgn = 0.0;
     bool start = 0;
-    double x = 0;
-    double h = 0;
+    double x = 0.0;
+    double h = 0.0;
     if ((State_ == DE_STATE::DE_INIT) || (!OldPermit) || (delsgn * del <= 0.0)) {
         // On start and restart also set the work variables x and yy(*),
         // store the direction of integration and initialize the step size
         bool start = true;
         double x = t;
-        Matrix yy = y;
+        Matrix yy = copy(y);
         double delsgn = sign_(1.0, del);
         double h = sign_(max(fouru * abs(x), abs(tout - x)), tout - x);
     }
@@ -139,7 +138,6 @@ void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
             rho(2, 1) = 1.0;
             hi = tout - x;
             ki = kold + 1;
-
             // Initialize w[*] for computing g[*]
             for (int i = 1; i <= ki; ++i) {
                 temp1 = i;
@@ -188,430 +186,433 @@ void DEInteg(Matrix (*func)(double, Matrix), double t, double tout,
             OldPermit = PermitTOUT;
             return;                       // Normal exit
         }
-    }
-    // Test for too much work
-    //   if (nostep >= maxnum)
-    //       State_ = DE_STATE::DE_NUMSTEPS; // Too many steps
-    //       if (stiff)
-    //           State_ = DE_STATE::DE_STIFF;// Stiffness suspected
-    //       end
-    //       y         = yy;                // Copy last step
-    //       t         = x;
-    //       told      = t;
-    //       OldPermit = true;
-    //       return;                        // Weak failure exit
-    //   end
 
-    // Limit step size, set weight vector and take a step
-    h = sign_(min(abs(h), abs(tend - x)), h);
-    for (int l = 1; l <= n_eqn; ++l) {
-        wt(l, 1) = releps * abs(yy(l, 1)) + abseps;
-    }
-    //   Step
-    //
-    // Begin block 0
-    //
-    // Check if step size or error tolerance is too small for machine
-    // precision.  If first step, initialize phi array and estimate a
-    // starting step size. If step size is too small, determine an
-    // acceptable one.
-    //
-    double crash = false;
-    if (abs(h) < fouru * abs(x)) {
-        h = sign_(fouru * abs(x), h);
-        crash = true;
-        return;           // Exit
-    }
-    double p5eps = 0.5 * epsilon;
-    crash = false;
-    g(2, 1) = 1.0;
-    g(3, 1) = 0.5;
-    sig(2, 1) = 1.0;
+        // Test for too much work
+        //   if (nostep >= maxnum)
+        //       State_ = DE_STATE::DE_NUMSTEPS; // Too many steps
+        //       if (stiff)
+        //           State_ = DE_STATE::DE_STIFF;// Stiffness suspected
+        //       end
+        //       y         = yy;                // Copy last step
+        //       t         = x;
+        //       told      = t;
+        //       OldPermit = true;
+        //       return;                        // Weak failure exit
+        //   end
 
-    double ifail = 0;
-
-    // If error tolerance is too small, increase it to an
-    // acceptable value.
-
-    double round = 0.0;
-    for (int l = 0; l <= n_eqn; ++l) {
-        round = round + (y(l, 1) * y(l, 1)) / (wt(l, 1) * wt(l, 1));
-    }
-    round = twou * sqrt(round);
-    if (p5eps < round) {
-        epsilon = 2.0 * round * (1.0 + fouru);
-        crash = true;
-        return;
-    }
-    double sum = 0.0, absh = 0.0, hold = 0.0, hnew = 0.0;
-    int k = 0;
-    bool phase1, nornd;
-    double ns = 0.0, nsp1 = 0.0, realns = 0.0, temp2 = 0.0, reali = 0.0,
-            im1 = 0.0, temp4 = 0.0, nsm2 = 0.0, limit1 = 0.0, temp5 = 0.0, i = 0.0, temp3 = 0.0, temp6 = 0.0,
-            limit2 = 0.0, nsp2 = 0.0, ip1 = 0.0, tau = 0.0, xold = 0.0, erk = 0.0, erkm1 = 0.0, erkm2 = 0.0, err = 0.0, knew = 0.0;
-    int km2 = 0, km1 = 0, kp1 = 0, kp2 = 0;
-    if (start) {
-        // Initialize. Compute appropriate step size for first step.
-        yp = func(x, y);
-        sum = 0.0;
-
+        // Limit step size, set weight vector and take a step
+        h = sign_(min(abs(h), abs(tend - x)), h);
         for (int l = 1; l <= n_eqn; ++l) {
-            phi(l, 2) = yp(l, 1);
-            phi(l, 3) = 0.0;
-            sum = sum + (yp(l, 1) * yp(l, 1)) / (wt(l, 1) * wt(l, 1));
+            wt(l, 1) = releps * abs(yy(l, 1)) + abseps;
         }
-        sum = sqrt(sum);
-        absh = abs(h);
-        if (epsilon < 16.0 * sum * h * h) absh = 0.25 * sqrt(epsilon / sum);
-        h = sign_(max(absh, fouru * abs(x)), h);
-        hold = 0.0;
-        hnew = 0.0;
-        k = 1;
-        kold = 0;
-        start = false;
-        phase1 = true;
-        nornd = true;
-        if (p5eps <= 100.0 * round) {
-            nornd = false;
-            for (int l = 1; l < n_eqn; ++l) {
-                phi(l, 16) = 0.0;
+        //   Step
+        //
+        // Begin block 0
+        //
+        // Check if step size or error tolerance is too small for machine
+        // precision.  If first step, initialize phi array and estimate a
+        // starting step size. If step size is too small, determine an
+        // acceptable one.
+        //
+        double crash = false;
+        if (abs(h) < fouru * abs(x)) {
+            h = sign_(fouru * abs(x), h);
+            crash = true;
+            return;           // Exit
+        }
+        double p5eps = 0.5 * epsilon;
+        crash = false;
+        g(2, 1) = 1.0;
+        g(3, 1) = 0.5;
+        sig(2, 1) = 1.0;
+
+        double ifail = 0.0;
+
+        // If error tolerance is too small, increase it to an
+        // acceptable value.
+
+        double round = 0.0;
+        for (int l = 1; l <= n_eqn; l++) {
+            double aux1 = y(l, 1) * y(l, 1);
+            double aux2 = wt(l, 1) * wt(l, 1);
+            round = round + (y(l, 1) * y(l, 1)) / (wt(l, 1) * wt(l, 1));
+        }
+        round = twou * sqrt(round);
+        if (p5eps < round) {
+            epsilon = 2.0 * round * (1.0 + fouru);
+            crash = true;
+            return;
+        }
+        double sum = 0.0, absh = 0.0, hold = 0.0, hnew = 0.0;
+        int k = 0;
+        bool phase1, nornd;
+        double ns = 0.0, nsp1 = 0.0, realns = 0.0, temp2 = 0.0, reali = 0.0,
+                im1 = 0.0, temp4 = 0.0, nsm2 = 0.0, limit1 = 0.0, temp5 = 0.0, i = 0.0, temp3 = 0.0, temp6 = 0.0,
+                limit2 = 0.0, nsp2 = 0.0, ip1 = 0.0, tau = 0.0, xold = 0.0, erk = 0.0, erkm1 = 0.0, erkm2 = 0.0, err = 0.0, knew = 0.0;
+        int km2 = 0.0, km1 = 0.0, kp1 = 0.0, kp2 = 0.0;
+        if (start) {
+            // Initialize. Compute appropriate step size for first step.
+            yp = func(x, y);
+            sum = 0.0;
+
+            for (int l = 1; l <= n_eqn; ++l) {
+                phi(l, 2) = yp(l, 1);
+                phi(l, 3) = 0.0;
+                sum = sum + (yp(l, 1) * yp(l, 1)) / (wt(l, 1) * wt(l, 1));
             }
-        }
-        //
-        // End block 0
-        //
-
-        //
-        // Repeat blocks 1, 2 (and 3) until step is successful
-        //
-
-        while (true) {
-
-            //
-            // Begin block 1
-            //
-            // Compute coefficients of formulas for this step. Avoid computing
-            // those quantities not changed when step size is not changed.
-            //
-
-            kp1 = k + 1;
-            kp2 = k + 2;
-            km1 = k - 1;
-            km2 = k - 2;
-
-            // ns is the number of steps taken with size h, including the
-            // current one. When k<ns, no coefficients change.
-
-            if (h != hold)ns = 0;
-            if (ns <= kold) ns = ns + 1;
-            nsp1 = ns + 1;
-
-            if (k >= ns) {
-                // Compute those components of alpha[*],beta[*],psi[*],sig[*]
-                // which are changed
-                beta(ns + 1, 1) = 1.0;
-                realns = ns;
-                alpha(ns + 1, 1) = 1.0 / realns;
-                temp1 = h * realns;
-                sig(nsp1 + 1, 1) = 1.0;
-                if (k >= nsp1) {
-                    for (int i = nsp1; i <= k; ++i) {
-                        im1 = i - 1;
-                        temp2 = psi_(im1 + 1, 1);
-                        psi_(im1 + 1, 1) = temp1;
-                        beta(i + 1, 1) = beta(im1 + 1, 1) * psi_(im1 + 1, 1) / temp2;
-                        temp1 = temp2 + h;
-                        alpha(i + 1, 1) = h / temp1;
-                        reali = i;
-                        sig(i + 2, 1) = reali * alpha(i + 1, 1) * sig(i + 1, 1);
-                    }
+            sum = sqrt(sum);
+            absh = abs(h);
+            if (epsilon < 16.0 * sum * h * h) absh = 0.25 * sqrt(epsilon / sum);
+            h = sign_(max(absh, fouru * abs(x)), h);
+            hold = 0.0;
+            hnew = 0.0;
+            k = 1;
+            kold = 0.0;
+            start = false;
+            phase1 = true;
+            nornd = true;
+            if (p5eps <= 100.0 * round) {
+                nornd = false;
+                for (int l = 1; l < n_eqn; ++l) {
+                    phi(l, 16) = 0.0;
                 }
-                psi_(k + 1, 1) = temp1;
-                // Compute coefficients g[*]; initialize v[*] and set w[*].
-                if (ns > 1) {
-                    // If order was raised, update diagonal part of v[*]
-                    if (k > kold) {
-                        temp4 = k * kp1;
-                        v(k + 1, 1) = 1.0 / temp4;
-                        nsm2 = ns - 2;
-                        for (int j = 1; j < nsm2; ++j) {
-                            i = k - j;
-                            v(i + 1, 1) = v(i + 1, 1) - alpha(j + 2, 1) * v(i + 2, 1);
+            }
+            //
+            // End block 0
+            //
+
+            //
+            // Repeat blocks 1, 2 (and 3) until step is successful
+            //
+
+            while (true) {
+
+                //
+                // Begin block 1
+                //
+                // Compute coefficients of formulas for this step. Avoid computing
+                // those quantities not changed when step size is not changed.
+                //
+
+                kp1 = k + 1;
+                kp2 = k + 2;
+                km1 = k - 1;
+                km2 = k - 2;
+
+                // ns is the number of steps taken with size h, including the
+                // current one. When k<ns, no coefficients change.
+
+                if (h != hold)ns = 0.0;
+                if (ns <= kold) ns = ns + 1.0;
+                nsp1 = ns + 1.0;
+
+                if (k >= ns) {
+                    // Compute those components of alpha[*],beta[*],psi[*],sig[*]
+                    // which are changed
+                    beta(ns + 1, 1) = 1.0;
+                    realns = ns;
+                    alpha(ns + 1, 1) = 1.0 / realns;
+                    temp1 = h * realns;
+                    sig(nsp1 + 1, 1) = 1.0;
+                    if (k >= nsp1) {
+                        for (int i = nsp1; i <= k; ++i) {
+                            im1 = i - 1;
+                            temp2 = psi_(im1 + 1, 1);
+                            psi_(im1 + 1, 1) = temp1;
+                            beta(i + 1, 1) = beta(im1 + 1, 1) * psi_(im1 + 1, 1) / temp2;
+                            temp1 = temp2 + h;
+                            alpha(i + 1, 1) = h / temp1;
+                            reali = i;
+                            sig(i + 2, 1) = reali * alpha(i + 1, 1) * sig(i + 1, 1);
                         }
                     }
-                    // Update V[*] and set W[*]
-                    limit1 = kp1 - ns;
-                    temp5 = alpha(ns + 1, 1);
-                    for (int iq = 1; iq <= limit1; ++iq) {
-                        v(iq + 1, 1) = v(iq + 1, 1) - temp5 * v(iq + 2, 1);
-                        w(iq + 1, 1) = v(iq + 1, 1);
-                    }
-                    g(nsp1 + 1, 1) = w(2, 1);
-                } else
-                    for (int iq = 1; iq <= k; ++iq) {
-                        temp3 = iq * (iq + 1);
-                        v(iq + 1, 1) = 1.0 / temp3;
-                        w(iq + 1, 1) = v(iq + 1, 1);
-                    }
-            }
-            // Compute the g[*] in the work vector w[*]
-            nsp2 = ns + 2;
-            if (kp1 >= nsp2) {
-                for (int i = nsp2; i <= kp1; ++i) {
-                    limit2 = kp2 - i;
-                    temp6 = alpha(i, 1);
-                    for (int iq = 1; iq <= limit2; ++iq) {
-                        w(iq + 1, 1) = w(iq + 1, 1) - temp6 * w(iq + 2, 1);
-                    }
-                    g(i + 1, 1) = w(2, 1);
+                    psi_(k + 1, 1) = temp1;
+                    // Compute coefficients g[*]; initialize v[*] and set w[*].
+                    if (ns > 1) {
+                        // If order was raised, update diagonal part of v[*]
+                        if (k > kold) {
+                            temp4 = k * kp1;
+                            v(k + 1, 1) = 1.0 / temp4;
+                            nsm2 = ns - 2;
+                            for (int j = 1; j < nsm2; ++j) {
+                                i = k - j;
+                                v(i + 1, 1) = v(i + 1, 1) - alpha(j + 2, 1) * v(i + 2, 1);
+                            }
+                        }
+                        // Update V[*] and set W[*]
+                        limit1 = kp1 - ns;
+                        temp5 = alpha(ns + 1, 1);
+                        for (int iq = 1; iq <= limit1; ++iq) {
+                            v(iq + 1, 1) = v(iq + 1, 1) - temp5 * v(iq + 2, 1);
+                            w(iq + 1, 1) = v(iq + 1, 1);
+                        }
+                        g(nsp1 + 1, 1) = w(2, 1);
+                    } else
+                        for (int iq = 1; iq <= k; ++iq) {
+                            temp3 = iq * (iq + 1);
+                            v(iq + 1, 1) = 1.0 / temp3;
+                            w(iq + 1, 1) = v(iq + 1, 1);
+                        }
                 }
-            }
-            // if K>=NS
-            //
-            // End block 1
-            //
+                // Compute the g[*] in the work vector w[*]
+                nsp2 = ns + 2.0;
+                if (kp1 >= nsp2) {
+                    for (int i = nsp2; i <= kp1; ++i) {
+                        limit2 = kp2 - i;
+                        temp6 = alpha(i, 1);
+                        for (int iq = 1; iq <= limit2; ++iq) {
+                            w(iq + 1, 1) = w(iq + 1, 1) - temp6 * w(iq + 2, 1);
+                        }
+                        g(i + 1, 1) = w(2, 1);
+                    }
+                }
+                // if K>=NS
+                //
+                // End block 1
+                //
 
-            //
-            // Begin block 2
-            //
-            // Predict a solution p[*], evaluate derivatives using predicted
-            // solution, estimate local error at order k and errors at orders
-            // k, k-1, k-2 as if constant step size were used.
-            //
+                //
+                // Begin block 2
+                //
+                // Predict a solution p[*], evaluate derivatives using predicted
+                // solution, estimate local error at order k and errors at orders
+                // k, k-1, k-2 as if constant step size were used.
+                //
 
-            // Change phi to phi star
-            if (k >= nsp1) {
-                for (int i = nsp1; i <= k; ++i) {
-                    temp1 = beta(i + 1, 1);
-                    for (int l = 1; l <= n_eqn; ++l) {
-                        phi(l, i + 1) = temp1 * phi(l, i + 1);
+                // Change phi to phi star
+                if (k >= nsp1) {
+                    for (int i = nsp1; i <= k; ++i) {
+                        temp1 = beta(i + 1, 1);
+                        for (int l = 1; l <= n_eqn; ++l) {
+                            phi(l, i + 1) = temp1 * phi(l, i + 1);
+                        }
                     }
                 }
-            }
-            // Predict solution and differences
-            for (int l = 1; l <= n_eqn; ++l) {
-                phi(l, kp2 + 1) = phi(l, kp1 + 1);
-                phi(l, kp1 + 1) = 0.0;
-                p(l, 1) = 0.0;
-            }
-            for (int j = 0; j <= k; ++j) {
-                i = kp1 - j;
-                ip1 = i + 1;
-                temp2 = g(i + 1, 1);
-                for (int l = 1; l <= n_eqn; l++) {
-                    p(l, 1) = p(l, 1) + temp2 * phi(l, i + 1);
-                    phi(l, i + 1) = phi(l, i + 1) + phi(l, ip1 + 1);
-                }
-            }
-            if (nornd) p = y + p * h;
-            else {
+                // Predict solution and differences
                 for (int l = 1; l <= n_eqn; ++l) {
-                    tau = h * p(l, 1) - phi(l, 16);
-                    p(l, 1) = y(l, 1) + tau;
-                    phi(l, 17) = (p(l, 1) - y(l, 1)) - tau;
+                    phi(l, kp2 + 1) = phi(l, kp1 + 1);
+                    phi(l, kp1 + 1) = 0.0;
+                    p(l, 1) = 0.0;
                 }
-            }
-            xold = x;
-            x = x + h;
-            absh = abs(h);
-            yp = func(x, p);
-
-            // Estimate errors at orders k, k-1, k-2
-            erkm2 = 0.0;
-            erkm1 = 0.0;
-            erk = 0.0;
-
-            for (int l = 1; l <= n_eqn; ++l) {
-                temp3 = 1.0 / wt(l, 1);
-                temp4 = yp(l, 1) - phi(l, 1 + 1);
-                if (km2 > 0)erkm2 = erkm2 + ((phi(l, km1 + 1) + temp4) * temp3) * ((phi(l, km1 + 1) + temp4) * temp3);
-                if (km2 >= 0)erkm1 = erkm1 + ((phi(l, k + 1) + temp4) * temp3) * ((phi(l, k + 1) + temp4) * temp3);
-                erk = erk + (temp4 * temp3) * (temp4 * temp3);
-            }
-
-            if (km2 > 0) erkm2 = absh * sig(km1 + 1, 1) * gstr[km2 + 1] * sqrt(erkm2);
-            if (km2 >= 0) erkm1 = absh * sig(k + 1, 1) * gstr[km1 + 1] * sqrt(erkm1);
-            temp5 = absh * sqrt(erk);
-
-            err = temp5 * (g(k + 1, 1) - g(kp1 + 1, 1));
-            erk = temp5 * sig(kp1 + 1, 1) * gstr[k + 1];
-            knew = k;
-
-            // Test if order should be lowered
-            if (km2 > 0) {
-                if (max(erkm1, erkm2) <= erk) knew = km1;
-            }
-            if (km2 == 0) {
-                if (erkm1 <= 0.5 * erk) knew = km1;
-            }
-
-            //
-            // End block 2
-            //
-
-            //
-            // If step is successful continue with block 4, otherwise repeat
-            // blocks 1 and 2 after executing block 3
-            //
-            bool success = false;
-            if (!success) {
-
-                // Restore x, phi[*,*] and psi[*]
-                phase1 = false;
-                x = xold;
-                for (int i = 1; i <= k; ++i) {
-                    temp1 = 1.0 / beta(i + 1, 1);
+                for (int j = 0; j <= k; ++j) {
+                    i = kp1 - j;
                     ip1 = i + 1;
+                    temp2 = g(i + 1, 1);
+                    for (int l = 1; l <= n_eqn; l++) {
+                        p(l, 1) = p(l, 1) + temp2 * phi(l, i + 1);
+                        phi(l, i + 1) = phi(l, i + 1) + phi(l, ip1 + 1);
+                    }
+                }
+                if (nornd) p = y + p * h;
+                else {
                     for (int l = 1; l <= n_eqn; ++l) {
-                        phi(l, i + 1) = temp1 * (phi(l, i + 1) - phi(l, ip1 + 1));
+                        tau = h * p(l, 1) - phi(l, 16);
+                        p(l, 1) = y(l, 1) + tau;
+                        phi(l, 17) = (p(l, 1) - y(l, 1)) - tau;
                     }
                 }
-                if (k >= 2) {
-                    for (int i = 2; i <= k; ++i) {
-                        psi_(i, 1) = psi_(i + 1, 1) - h;
-                    }
-                }
-                // On third failure, set order to one.
-                // Thereafter, use optimal step size
-                ifail = ifail + 1;
-                temp2 = 0.5;
-                if (ifail > 3) {
-                    if (p5eps < 0.25 * erk) temp2 = sqrt(p5eps / erk);
-                }
-                if (ifail >= 3)knew = 1;
-                h = temp2 * h;
-                k = knew;
-                if (abs(h) < fouru * abs(x)) {
-                    crash = true;
-                    h = sign_(fouru * abs(x), h);
-                    epsilon = epsilon * 2.0;
-                    return;
-                }                // Exit
+                xold = x;
+                x = x + h;
+                absh = abs(h);
+                yp = func(x, p);
 
-            }
-            if (success) break;
-        }
-    }
+                // Estimate errors at orders k, k-1, k-2
+                erkm2 = 0.0;
+                erkm1 = 0.0;
+                erk = 0.0;
 
-    //
-    // Begin block 4
-    //
-    // The step is successful. Correct the predicted solution, evaluate
-    // the derivatives using the corrected solution and update the
-    // differences. Determine best order and step size for next step.
-    //
-
-    kold = k;
-    hold = h;
-    // Correct and evaluate
-    double rhoo = 0.0, erkp1 = 0.0;
-    temp1 = h * g(kp1 + 1, 1);
-    if (nornd) {
-        for (int l = 1; l <= n_eqn; ++l) {
-            y(l, 1) = p(l, 1) + temp1 * (yp(l, 1) - phi(l, 2));
-        }
-    } else {
-        for (int l = 1; l <= n_eqn; ++l) {
-            rhoo = (temp1 * (yp(l, 1) - phi(l, 2)) - phi(l, 17));
-            y(l, 1) = p(l, 1) + rhoo;
-            phi(l, 16) = (y(l, 1) - p(l, 1)) - rhoo;
-        }
-    }
-    yp = func(x, y);
-    // Update differences for next step
-    for (int l = 1; l <= n_eqn; ++l) {
-        phi(l, kp1 + 1) = yp(l, 1) - phi(l, 2);
-        phi(l, kp2 + 1) = phi(l, kp1 + 1) - phi(l, kp2 + 1);
-    }
-    for (int i = 1; i <= k; ++i) {
-        for (int l = 1; l <= n_eqn; ++l) {
-            phi(l, i + 1) = phi(l, i + 1) + phi(l, kp1 + 1);
-        }
-    }
-    // Estimate error at order k+1 unless
-    // - in first phase when always raise order,
-    // - already decided to lower order,
-    // - step size not constant so estimate unreliable
-    erkp1 = 0.0;
-    if ((knew == km1) || (k == 12)) {
-        phase1 = false;
-    }
-
-    if (phase1) {
-        k = kp1;
-        erk = erkp1;
-    } else {
-        if (knew == km1) {
-            // lower order
-            k = km1;
-            erk = erkm1;
-        } else {
-            if (kp1 <= ns) {
                 for (int l = 1; l <= n_eqn; ++l) {
-                    erkp1 = erkp1 + (phi(l, kp2 + 1) / wt(l, 1)) * (phi(l, kp2 + 1) / wt(l, 1));
+                    temp3 = 1.0 / wt(l, 1);
+                    temp4 = yp(l, 1) - phi(l, 1 + 1);
+                    if (km2 > 0)
+                        erkm2 = erkm2 + ((phi(l, km1 + 1) + temp4) * temp3) * ((phi(l, km1 + 1) + temp4) * temp3);
+                    if (km2 >= 0)erkm1 = erkm1 + ((phi(l, k + 1) + temp4) * temp3) * ((phi(l, k + 1) + temp4) * temp3);
+                    erk = erk + (temp4 * temp3) * (temp4 * temp3);
                 }
-                erkp1 = absh * gstr[kp1 + 1] * sqrt(erkp1);
-                // Using estimated error at order k+1, determine
-                // appropriate order for next step
-                if (k > 1) {
-                    if (erkm1 <= min(erk, erkp1)) {
-                        // lower order
-                        k = km1;
-                        erk = erkm1;
-                    } else {
-                        if ((erkp1 < erk) && (k != 12)) {}                        // raise order
+
+                if (km2 > 0) erkm2 = absh * sig(km1 + 1, 1) * gstr[km2 + 1] * sqrt(erkm2);
+                if (km2 >= 0) erkm1 = absh * sig(k + 1, 1) * gstr[km1 + 1] * sqrt(erkm1);
+                temp5 = absh * sqrt(erk);
+
+                err = temp5 * (g(k + 1, 1) - g(kp1 + 1, 1));
+                erk = temp5 * sig(kp1 + 1, 1) * gstr[k + 1];
+                knew = k;
+
+                // Test if order should be lowered
+                if (km2 > 0) {
+                    if (max(erkm1, erkm2) <= erk) knew = km1;
+                }
+                if (km2 == 0) {
+                    if (erkm1 <= 0.5 * erk) knew = km1;
+                }
+
+                //
+                // End block 2
+                //
+
+                //
+                // If step is successful continue with block 4, otherwise repeat
+                // blocks 1 and 2 after executing block 3
+                //
+                bool success = false;
+                if (!success) {
+
+                    // Restore x, phi[*,*] and psi[*]
+                    phase1 = false;
+                    x = xold;
+                    for (int i = 1; i <= k; ++i) {
+                        temp1 = 1.0 / beta(i + 1, 1);
+                        ip1 = i + 1;
+                        for (int l = 1; l <= n_eqn; ++l) {
+                            phi(l, i + 1) = temp1 * (phi(l, i + 1) - phi(l, ip1 + 1));
+                        }
+                    }
+                    if (k >= 2) {
+                        for (int i = 2; i <= k; ++i) {
+                            psi_(i, 1) = psi_(i + 1, 1) - h;
+                        }
+                    }
+                    // On third failure, set order to one.
+                    // Thereafter, use optimal step size
+                    ifail = ifail + 1.0;
+                    temp2 = 0.5;
+                    if (ifail > 3) {
+                        if (p5eps < 0.25 * erk) temp2 = sqrt(p5eps / erk);
+                    }
+                    if (ifail >= 3)knew = 1.0;
+                    h = temp2 * h;
+                    k = knew;
+                    if (abs(h) < fouru * abs(x)) {
+                        crash = true;
+                        h = sign_(fouru * abs(x), h);
+                        epsilon = epsilon * 2.0;
+                        return;
+                    }                // Exit
+
+                }
+                if (success) break;
+            }
+        }
+
+        //
+        // Begin block 4
+        //
+        // The step is successful. Correct the predicted solution, evaluate
+        // the derivatives using the corrected solution and update the
+        // differences. Determine best order and step size for next step.
+        //
+
+        kold = k;
+        hold = h;
+        // Correct and evaluate
+        double rhoo = 0.0, erkp1 = 0.0;
+        temp1 = h * g(kp1 + 1, 1);
+        if (nornd) {
+            for (int l = 1; l <= n_eqn; ++l) {
+                y(l, 1) = p(l, 1) + temp1 * (yp(l, 1) - phi(l, 2));
+            }
+        } else {
+            for (int l = 1; l <= n_eqn; ++l) {
+                rhoo = (temp1 * (yp(l, 1) - phi(l, 2)) - phi(l, 17));
+                y(l, 1) = p(l, 1) + rhoo;
+                phi(l, 16) = (y(l, 1) - p(l, 1)) - rhoo;
+            }
+        }
+        yp = func(x, y);
+        // Update differences for next step
+        for (int l = 1; l <= n_eqn; ++l) {
+            phi(l, kp1 + 1) = yp(l, 1) - phi(l, 2);
+            phi(l, kp2 + 1) = phi(l, kp1 + 1) - phi(l, kp2 + 1);
+        }
+        for (int i = 1; i <= k; ++i) {
+            for (int l = 1; l <= n_eqn; ++l) {
+                phi(l, i + 1) = phi(l, i + 1) + phi(l, kp1 + 1);
+            }
+        }
+        // Estimate error at order k+1 unless
+        // - in first phase when always raise order,
+        // - already decided to lower order,
+        // - step size not constant so estimate unreliable
+        erkp1 = 0.0;
+        if ((knew == km1) || (k == 12)) {
+            phase1 = false;
+        }
+
+        if (phase1) {
+            k = kp1;
+            erk = erkp1;
+        } else {
+            if (knew == km1) {
+                // lower order
+                k = km1;
+                erk = erkm1;
+            } else {
+                if (kp1 <= ns) {
+                    for (int l = 1; l <= n_eqn; ++l) {
+                        erkp1 = erkp1 + (phi(l, kp2 + 1) / wt(l, 1)) * (phi(l, kp2 + 1) / wt(l, 1));
+                    }
+                    erkp1 = absh * gstr[kp1 + 1] * sqrt(erkp1);
+                    // Using estimated error at order k+1, determine
+                    // appropriate order for next step
+                    if (k > 1) {
+                        if (erkm1 <= min(erk, erkp1)) {
+                            // lower order
+                            k = km1;
+                            erk = erkm1;
+                        } else {
+                            if ((erkp1 < erk) && (k != 12)) {}                        // raise order
+                            k = kp1;
+                            erk = erkp1;
+                        }
+                    } else if (erkp1 < 0.5 * erk) {
+                        // raise order
+                        // Here erkp1 < erk < max(erkm1,ermk2) else
+                        // order would have been lowered in block 2.
+                        // Thus order is to be raised
                         k = kp1;
                         erk = erkp1;
                     }
-                } else if (erkp1 < 0.5 * erk) {
-                    // raise order
-                    // Here erkp1 < erk < max(erkm1,ermk2) else
-                    // order would have been lowered in block 2.
-                    // Thus order is to be raised
-                    k = kp1;
-                    erk = erkp1;
                 }
             }
         }
-    }
-    // With new order determine appropriate step size for next step
-    double r = 0.0;
-    if (phase1 || (p5eps >= erk * two[k + 2])) {
-        hnew = 2.0 * h;
-    } else {
-        if (p5eps < erk) {
-            temp2 = k + 1;
-            r = p5eps / pow(erk, (1.0 / temp2));
-            hnew = absh * max(0.5, min(0.9, r));
-            hnew = sign_(max(hnew, fouru * abs(x)), h);
+        // With new order determine appropriate step size for next step
+        double r = 0.0;
+        if (phase1 || (p5eps >= erk * two[k + 2])) {
+            hnew = 2.0 * h;
         } else {
-            hnew = h;
+            if (p5eps < erk) {
+                temp2 = k + 1;
+                r = p5eps / pow(erk, (1.0 / temp2));
+                hnew = absh * max(0.5, min(0.9, r));
+                hnew = sign_(max(hnew, fouru * abs(x)), h);
+            } else {
+                hnew = h;
+            }
         }
+        h = hnew;
+        //
+        // End block 4
+        //
+
+        // Test for too small tolerances
+        if (crash) {
+            State_ = DE_STATE::DE_BADACC;
+            relerr = epsilon * releps;       // Modify relative and absolute
+            abserr = epsilon * abseps;       // accuracy requirements
+            y = yy;                   // Copy last step
+            t = x;
+            told = t;
+            OldPermit = true;
+            return;
+        }// Weak failure exit
+        nostep = nostep + 1;  // Count total number of steps
+
+        // Count number of consecutive steps taken with the order of
+        // the method being less or equal to four and test for stiffness
+        kle4 = kle4 + 1.0;
+        if (kold > 4) kle4 = 0.0;
+        if (kle4 >= 50) stiff = true;
     }
-    h = hnew;
-    //
-    // End block 4
-    //
-
-    // Test for too small tolerances
-    if (crash) {
-        State_ = DE_STATE::DE_BADACC;
-        relerr = epsilon * releps;       // Modify relative and absolute
-        abserr = epsilon * abseps;       // accuracy requirements
-        y = yy;                   // Copy last step
-        t = x;
-        told = t;
-        OldPermit = true;
-        return;
-    }// Weak failure exit
-    nostep = nostep + 1;  // Count total number of steps
-
-    // Count number of consecutive steps taken with the order of
-    // the method being less or equal to four and test for stiffness
-    kle4 = kle4 + 1;
-    if (kold > 4) kle4 = 0;
-    if (kle4 >= 50) stiff = true;
-
      // End step loop
 
     //   if ( State_==DE_STATE::DE_INVPARAM )

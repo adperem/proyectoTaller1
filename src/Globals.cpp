@@ -69,6 +69,7 @@ void Globals::PCLoad() {
 }
 
 void Globals::ObsLoad() {
+    Globals::obs = new Matrix(46, 4);
     std::ifstream file("../data/GEOS3.txt");
     if (!file.is_open()) {
         std::cerr << "Error: No se pudo abrir el archivo GEOS3.txt"<< std::endl;

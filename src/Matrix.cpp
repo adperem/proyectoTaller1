@@ -122,7 +122,7 @@ Matrix Matrix::operator+(const double &other) const {
     return result;
 }
 
-Matrix Matrix::operator-(const Matrix other) const {
+Matrix Matrix::operator-(const Matrix &other) const {
     if (rows != other.rows || cols != other.cols) {
         throw std::invalid_argument("Las matrices deben tener la misma dimensión para restarse.");
     }
@@ -439,10 +439,12 @@ Matrix copy(const Matrix &original) {
 }
 
 Matrix::~Matrix() {
+/*
     // Liberar la memoria asignada a los datos de la matriz
     for (int i = 0; i < rows; ++i) {
         delete[] data[i];
     }
     delete[] data;
+*/
 
 }

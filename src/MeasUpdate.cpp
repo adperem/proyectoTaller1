@@ -15,6 +15,7 @@ void MeasUpdate(Matrix& x, double z, double g, double s, Matrix G, Matrix& P, do
     // Kalman gain
 
 
+
     K = P*G.transpose()*(1.0/(Inv_W+G*P*G.transpose())(1,1));
 
 

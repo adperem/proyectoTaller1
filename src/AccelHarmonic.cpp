@@ -17,8 +17,11 @@
 
 Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
-    //r.print();
-    //printf("\n");
+    r.print();
+    printf("\n");
+
+    E.print();
+    printf("\n");
     double r_ref = 6378.1363e3;   // Earth's radius [m]; GGM03S
     double gm = 398600.4415e9; // [m^3/s^2]; GGM03S
 
@@ -30,6 +33,7 @@ Matrix AccelHarmonic(Matrix r, Matrix E, int n_max, int m_max) {
 
     // Auxiliary quantities
     double d = norm(r_bf);                     // distance
+    //r_bf.print();
     double latgc = asin(r_bf(3, 1) / d);
     double lon = atan2(r_bf(2, 1), r_bf(1, 1));
 

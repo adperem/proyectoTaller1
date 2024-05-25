@@ -24,5 +24,5 @@
 //
 //----------------------------------------------------------------------------
 void
-DEInteg(Matrix (*func)(double, Matrix), double t, double tout, double relerr, double abserr, double n_eqn, Matrix y, Matrix &exit);
+DEInteg(Matrix (*func)(double, Matrix), double t, double tout, double relerr, double abserr, double n_eqn, Matrix& y);
 #endif //PROYECTOTALLER1_DEINTEG_H

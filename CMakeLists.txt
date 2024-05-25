@@ -92,7 +92,7 @@ add_executable(proyectoTaller1
         src/elements.cpp
         src/VarEqn.cpp
         src/G_AccelHarmonic.cpp
-        #src/EKF_GEOS3.cpp
+        src/EKF_GEOS3.cpp
 
 
         #test/testAzElPa.cpp
@@ -129,7 +129,7 @@ add_executable(proyectoTaller1
         #test/testVarEqn.cpp
         #test/testAccelHarmonic.cpp
         #test/TestAccel.cpp
-        test/testG_AccelHarmonic.cpp
+        #test/testG_AccelHarmonic.cpp
         #test/testDoubler.cpp
 
 

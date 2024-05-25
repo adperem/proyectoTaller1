@@ -134,7 +134,7 @@ public:
      * @param other La segunda matriz a restar.
      * @return La matriz resultante de la resta.
      */
-    Matrix operator-(const Matrix other) const;
+    Matrix operator-(const Matrix &other) const;
 
     /**
      * @brief Sobrecarga del operador de multiplicación (*).
